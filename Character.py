@@ -9,4 +9,4 @@ class Character:
         self.attack = attack
 
 
-bandit = Character(101, 'Ralf', 500, 230)
+foe = Character(101, 'Ralf', 500, 230)

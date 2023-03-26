@@ -3,7 +3,7 @@ Import google sheet
 """
 import gspread
 from google.oauth2.service_account import Credentials
-import Character
+# import Character
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -25,4 +25,18 @@ player = SHEET.worksheet("player")
 player_data = player.get_all_values()
 print(player_data)
 
-print(Character.bandit.attack)
+value = foe.cell(4, 4)
+
+class Character:
+    """
+    Creat Character class
+    """
+    def __init__(self, cid, name, health, attack):
+        self.cid = cid
+        self.name = name
+        self.health = health
+        self.attack = attack
+
+
+foes = Character(101, foe_name, 500, value)
+print(foes.attack)
