@@ -25,7 +25,8 @@ player = SHEET.worksheet("player")
 player_data = player.get_all_values()
 print(player_data)
 
-value = foe.cell(4, 4)
+
+
 
 class Character:
     """
@@ -37,6 +38,18 @@ class Character:
         self.health = health
         self.attack = attack
 
+    def attack1(self, health):
+        """
+        ATTACK
+        """
+        updated_health = int(health) - 10
+        print(updated_health)
 
-foes = Character(101, foe_name, 500, value)
+
+value_test = foe.cell(3, 3).value
+
+foes = Character(101, foe_name, 500, value_test)
 print(foes.attack)
+print(foes.health)
+foes.attack1(foes.attack)
+print(foes.health)
