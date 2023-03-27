@@ -26,20 +26,20 @@ class Character:
         self.health = health
         self.attack_power = attack_power
 
-    def attack(self, health):
+    def attack(self, name, attack_power):
         """
         ATTACK
         """
-        updated_health = int(health) - 10
-        print(updated_health)
+        damage_dealt = attack_power
+        print(f"{name} has dealt {damage_dealt} damage")
 
 
 player_info_all = SHEET.worksheet("player")
 # player_data = player_info_all.get_all_values()
 player_id = player_info_all.cell(2, 1).value
 player_name = player_info_all.cell(2, 2).value
-player_health = player_info_all.cell(2, 3).value
-player_attack_power = player_info_all.cell(2, 4).value
+player_health = int(player_info_all.cell(2, 3).value)
+player_attack_power = int(player_info_all.cell(2, 4).value)
 
 player = Character(player_id, player_name, player_health, player_attack_power)
 print(f"Hi, my name is {player.name}.")
@@ -51,8 +51,8 @@ foe_info_all = SHEET.worksheet("foe")
 # foe_data = foe.get_all_values()
 foe_id = foe_info_all.cell(2, 1).value
 foe_name = foe_info_all.cell(2, 2).value
-foe_health = foe_info_all.cell(2, 3).value
-foe_attack_power = foe_info_all.cell(2, 4).value
+foe_health = int(foe_info_all.cell(2, 3).value)
+foe_attack_power = int(foe_info_all.cell(2, 4).value)
 
 foe = Character(foe_id, foe_name, foe_health, foe_attack_power)
 print(f"Hi, my name is {foe.name}.")
@@ -60,11 +60,12 @@ print(f"I have {foe.cid} tattoed on my arm.")
 print(f"My health is at {foe.health}.")
 print(f"My attack power is {foe.attack_power}.\n")
 
-foe_names = foe_info_all.col_values(2)
-print(f"{player_name} Vs {foe_names[1]}")
-value_test = foe_info_all.cell(3, 3).value
-foes = Character(101, foe_name, 500, value_test)
-print(foes.attack_power)
-print(foes.health)
-foes.attack(foes.attack_power)
-print(foes.health)
+while foe.health > 0:
+    player.attack(player.name, player.attack_power)
+    foe.health -= player.attack_power
+    print(f"{foe.name} has {foe.health} health\n")
+
+while player.health > 0:
+    foe.attack(foe.name, foe.attack_power)
+    player.health -= foe.attack_power
+    print(f"{player.name} has {player.health} health remaining\n")
