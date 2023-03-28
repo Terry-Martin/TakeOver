@@ -3,7 +3,6 @@ Import google sheet
 """
 import gspread
 from google.oauth2.service_account import Credentials
-# import Character
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -26,12 +25,37 @@ class Character:
         self.health = health
         self.attack_power = attack_power
 
-    def attack(self, name, attack_power):
+    def attack(self, p_name, p_attack_power, p_health, f_name,
+               f_attack_power, f_health):
         """
         ATTACK
         """
-        damage_dealt = attack_power
-        print(f"{name} has dealt {damage_dealt} damage")
+        while f_health > 0 and p_health > 0:
+
+            print(f"{p_name} has dealt {p_attack_power} damage")
+            f_health -= p_attack_power
+            print(f"{f_name} has {f_health} health remaining\n")
+
+            if f_health <= 0:
+                print(f"{p_name} has defeated the {f_name}!!!")
+                break
+
+            print(f"{f_name} has dealt {f_attack_power} damage")
+            p_health -= f_attack_power
+            print(f"{p_name} has {p_health} health remaining\n")
+
+            if p_health <= 0:
+                print(f"The {f_name} has defeated {p_name}!!!")
+                break
+
+    def intro(self, cid, name, health, attack_power):
+        """
+        Display introduction
+        """
+        print(f"Hi, my name is {name}.")
+        print(f"I have the number {cid} tattoed on my arm.")
+        print(f"My health is at {health}.")
+        print(f"My attack power is {attack_power}.\n")
 
 
 player_info_all = SHEET.worksheet("player")
@@ -42,30 +66,19 @@ player_health = int(player_info_all.cell(2, 3).value)
 player_attack_power = int(player_info_all.cell(2, 4).value)
 
 player = Character(player_id, player_name, player_health, player_attack_power)
-print(f"Hi, my name is {player.name}.")
-print(f"I have {player.cid} tattoed on my arm.")
-print(f"My health is at {player.health}.")
-print(f"My attack power is {player.attack_power}.\n")
+
+player.intro(player.cid, player.name, player.health, player.attack_power)
 
 foe_info_all = SHEET.worksheet("foe")
-# foe_data = foe.get_all_values()
-foe_id = foe_info_all.cell(2, 1).value
-foe_name = foe_info_all.cell(2, 2).value
-foe_health = int(foe_info_all.cell(2, 3).value)
-foe_attack_power = int(foe_info_all.cell(2, 4).value)
+FOE_TYPE = 5
+foe_id = foe_info_all.cell(FOE_TYPE, 1).value
+foe_name = foe_info_all.cell(FOE_TYPE, 2).value
+foe_health = int(foe_info_all.cell(FOE_TYPE, 3).value)
+foe_attack_power = int(foe_info_all.cell(FOE_TYPE, 4).value)
 
 foe = Character(foe_id, foe_name, foe_health, foe_attack_power)
-print(f"Hi, my name is {foe.name}.")
-print(f"I have {foe.cid} tattoed on my arm.")
-print(f"My health is at {foe.health}.")
-print(f"My attack power is {foe.attack_power}.\n")
 
-while foe.health > 0:
-    player.attack(player.name, player.attack_power)
-    foe.health -= player.attack_power
-    print(f"{foe.name} has {foe.health} health\n")
+foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
 
-while player.health > 0:
-    foe.attack(foe.name, foe.attack_power)
-    player.health -= foe.attack_power
-    print(f"{player.name} has {player.health} health remaining\n")
+player.attack(player.name, player.attack_power, player.health, foe.name,
+              foe.attack_power, foe.health)
