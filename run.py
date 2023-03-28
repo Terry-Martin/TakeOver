@@ -1,5 +1,6 @@
 """
 Import google sheet
+Import adapted from LoveSandwiches example
 """
 import gspread
 from google.oauth2.service_account import Credentials
@@ -86,14 +87,14 @@ def start_battle():
             break
 
 
-def update_worksheet(data, worksheet):
+def add_new_player_to_worksheet(new_player, player_worksheet):
     """
-    Update worksheet, add new row with list data provided
+    Add new player to player google sheet
     """
-    print(f"Updating {worksheet} worksheet...\n")
-    worksheet_to_update = SHEET.worksheet(worksheet)
-    worksheet_to_update.append_row(data)
-    print(f"{worksheet} worksheet updated successfully. \n")
+    print(f"Updating {player_worksheet} worksheet...\n")
+    player_worksheet_update = SHEET.worksheet(player_worksheet)
+    player_worksheet_update.append_row(new_player)
+    print(f"{player_worksheet} worksheet updated successfully. \n")
 
 
 def main():
@@ -103,8 +104,10 @@ def main():
     player.intro(player.cid, player.name, player.health, player.attack_power)
     foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
     start_battle()
-    new_surplus_data = ["One", "One", "One", "One"]
-    update_worksheet(new_surplus_data, "player")
+    username = input("Enter username: ")
+    print("Username is: " + username)
+    add_new_player = [4, username, 500, 75]
+    add_new_player_to_worksheet(add_new_player, "player")
 
 
 main()
