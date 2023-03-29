@@ -97,17 +97,27 @@ def add_new_player_to_worksheet(new_player, player_worksheet):
     print(f"{player_worksheet} worksheet updated successfully. \n")
 
 
+
+def create_new_player():
+    """
+    Create new player
+    """
+    player.name = input("Enter username: ")
+    print("Username is: " + player.name)
+    
+
+
 def main():
     """
     Main function
     """
+    create_new_player()
+    new_id = int(player.cid) + 1
+    add_new_player = [new_id, player.name, 500, 75]
+    add_new_player_to_worksheet(add_new_player, "player")
     player.intro(player.cid, player.name, player.health, player.attack_power)
     foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
     start_battle()
-    username = input("Enter username: ")
-    print("Username is: " + username)
-    add_new_player = [4, username, 500, 75]
-    add_new_player_to_worksheet(add_new_player, "player")
 
 
 main()
