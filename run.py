@@ -46,7 +46,6 @@ class Character:
 # Get information from google sheet for player
 player_info_all = SHEET.worksheet("player")
 player_data = player_info_all.get_all_values()
-# player_data = SHEET.get_all_records()
 player_id = player_info_all.cell(2, 1).value
 player_name = player_info_all.cell(2, 2).value
 player_health = int(player_info_all.cell(2, 3).value)
@@ -55,16 +54,21 @@ player_attack_power = int(player_info_all.cell(2, 4).value)
 # Create player from Character class
 player = Character(player_id, player_name, player_health, player_attack_power)
 
-# Get information from google sheet for foe
-foe_info_all = SHEET.worksheet("foe")
-FOE_TYPE = 9
-foe_id = foe_info_all.cell(FOE_TYPE, 1).value
-foe_name = foe_info_all.cell(FOE_TYPE, 2).value
-foe_health = int(foe_info_all.cell(FOE_TYPE, 3).value)
-foe_attack_power = int(foe_info_all.cell(FOE_TYPE, 4).value)
 
-# Create foe from Chatacter class
-foe = Character(foe_id, foe_name, foe_health, foe_attack_power)
+def create_foe(foe_number):
+    """
+    Create foe
+    """
+    # Get information from google sheet for foe
+    foe_info_all = SHEET.worksheet("foe")
+    # FOE_TYPE = 10
+    foe_id = foe_info_all.cell(foe_number, 1).value
+    foe_name = foe_info_all.cell(foe_number, 2).value
+    foe_health = int(foe_info_all.cell(foe_number, 3).value)
+    foe_attack_power = int(foe_info_all.cell(foe_number, 4).value)
+
+    # Create foe from Chatacter class and send back to main function
+    return Character(foe_id, foe_name, foe_health, foe_attack_power)
 
 
 def start_battle():
@@ -97,14 +101,12 @@ def add_new_player_to_worksheet(new_player, player_worksheet):
     print(f"{player_worksheet} worksheet updated successfully. \n")
 
 
-
 def create_new_player():
     """
     Create new player
     """
     player.name = input("Enter username: ")
     print("Username is: " + player.name)
-    
 
 
 def main():
@@ -112,6 +114,19 @@ def main():
     Main function
     """
     create_new_player()
+
+    print("You see a camp on the road.")
+    print("Do you wish to approach it or keep riding towards town?")
+    player_choice = input("Press 1 to apprach camp or 2 to pass it by\n")
+    print(f"{player.name} selected {player_choice}")
+
+    if player_choice == "1":
+        print("Call method to create foe in row 2 of foe sheet")
+        foe = create_foe(4)
+    else:
+        print("Call method to create foe in row 3 of foe sheet")
+        foe = create_foe(9)
+
     new_id = int(player.cid) + 1
     add_new_player = [new_id, player.name, 500, 75]
     add_new_player_to_worksheet(add_new_player, "player")
