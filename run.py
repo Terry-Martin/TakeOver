@@ -153,8 +153,13 @@ def main():
                         foe_three.attack_power)
         start_battle(foe_three, player)
 
-    print("\nThe guard stops you at the gate and demand you remove your weapon. \n")
-    print("Do you wish to approach the guard or solider on horseback? \n")
+    # Get string text from google sheet
+    text_info_all = SHEET.worksheet("text")
+    text_one = text_info_all.cell(2, 2).value
+    print(text_one)
+    text_two = text_info_all.cell(3, 2).value
+    print(text_two)
+
     # Validate player input choice
     while True:
         player_choice = input("Press 1 to attack guard or 2 to apprach soldier \n")
