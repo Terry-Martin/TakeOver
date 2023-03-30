@@ -95,10 +95,8 @@ def add_new_player_to_worksheet(new_player, player_worksheet):
     """
     Add new player to player google sheet
     """
-    print(f"Updating {player_worksheet} worksheet...\n")
     player_worksheet_update = SHEET.worksheet(player_worksheet)
     player_worksheet_update.append_row(new_player)
-    print(f"{player_worksheet} worksheet updated successfully. \n")
 
 
 def create_new_player():
@@ -106,7 +104,6 @@ def create_new_player():
     Create new player
     """
     player.name = input("Enter username: ")
-    print("Username is: " + player.name)
 
 
 def main():
@@ -117,16 +114,23 @@ def main():
 
     print("\nYou see a camp on the road.\n")
     print("Do you wish to approach it or keep riding towards town?\n")
-    player_choice = input("Press 1 to apprach camp or 2 to pass it by\n")
-    print(f"{player.name} selected {player_choice}")
+    # Validate player input choice
+    # https://www.youtube.com/watch?v=LUWyA3m_-r0
+    while True:
+        player_choice = input("Press 1 to apprach camp or 2 to pass it by\n")
 
+        try:
+            player_choice = int(player_choice)
+            break
+        except ValueError:
+            print("You need to enter a number")
+            print()
+
+    print(f"{player.name} selected {player_choice}")
     if player_choice == "1":
-        print("Call method to create foe in row 2 of foe sheet")
         foe = create_foe(2)
     else:
-        print("Call method to create foe in row 3 of foe sheet")
         foe = create_foe(3)
-
     new_id = int(player.cid) + 1
     add_new_player = [new_id, player.name, 500, 75]
     add_new_player_to_worksheet(add_new_player, "player")
