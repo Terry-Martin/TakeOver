@@ -71,7 +71,7 @@ def create_foe(foe_number):
     return Character(foe_id, foe_name, foe_health, foe_attack_power)
 
 
-def start_battle():
+def start_battle(foe):
     """
     Start battle between player and foe
     """
@@ -115,24 +115,24 @@ def main():
     """
     create_new_player()
 
-    print("You see a camp on the road.")
-    print("Do you wish to approach it or keep riding towards town?")
+    print("\nYou see a camp on the road.\n")
+    print("Do you wish to approach it or keep riding towards town?\n")
     player_choice = input("Press 1 to apprach camp or 2 to pass it by\n")
     print(f"{player.name} selected {player_choice}")
 
     if player_choice == "1":
         print("Call method to create foe in row 2 of foe sheet")
-        foe = create_foe(4)
+        foe = create_foe(2)
     else:
         print("Call method to create foe in row 3 of foe sheet")
-        foe = create_foe(9)
+        foe = create_foe(3)
 
     new_id = int(player.cid) + 1
     add_new_player = [new_id, player.name, 500, 75]
     add_new_player_to_worksheet(add_new_player, "player")
     player.intro(player.cid, player.name, player.health, player.attack_power)
     foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
-    start_battle()
+    start_battle(foe)
 
 
 main()
