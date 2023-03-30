@@ -43,16 +43,20 @@ class Character:
         print(f"My attack power is {attack_power}.\n")
 
 
-# Get information from google sheet for player
-player_info_all = SHEET.worksheet("player")
-player_data = player_info_all.get_all_values()
-player_id = player_info_all.cell(2, 1).value
-player_name = player_info_all.cell(2, 2).value
-player_health = int(player_info_all.cell(2, 3).value)
-player_attack_power = int(player_info_all.cell(2, 4).value)
+def create_player():
+    """
+    Create player
+    """
+    # Get information from google sheet for player
+    player_info_all = SHEET.worksheet("player")
+    player_id = player_info_all.cell(2, 1).value
+    player_name = player_info_all.cell(2, 2).value
+    player_health = int(player_info_all.cell(2, 3).value)
+    player_attack_power = int(player_info_all.cell(2, 4).value)
 
-# Create player from Character class
-player = Character(player_id, player_name, player_health, player_attack_power)
+    # Create player from Character class
+    return Character(player_id, player_name, player_health,
+                     player_attack_power)
 
 
 def create_foe(foe_number):
@@ -61,7 +65,6 @@ def create_foe(foe_number):
     """
     # Get information from google sheet for foe
     foe_info_all = SHEET.worksheet("foe")
-    # FOE_TYPE = 10
     foe_id = foe_info_all.cell(foe_number, 1).value
     foe_name = foe_info_all.cell(foe_number, 2).value
     foe_health = int(foe_info_all.cell(foe_number, 3).value)
@@ -71,7 +74,7 @@ def create_foe(foe_number):
     return Character(foe_id, foe_name, foe_health, foe_attack_power)
 
 
-def start_battle(foe):
+def start_battle(foe, player):
     """
     Start battle between player and foe
     """
@@ -80,14 +83,14 @@ def start_battle(foe):
         foe.health = player.attack(foe.health, player.attack_power)
         print(f"{foe.name} has {foe.health} health remaining\n")
         if foe.health <= 0:
-            print(f"{player.name} has defeated the {foe.name}!!!")
+            print(f"{player.name} has defeated the {foe.name}!!! \n")
             break
 
         print(f"{foe.name} has dealt {foe.attack_power} damage")
         player.health = foe.attack(player.health, foe.attack_power)
         print(f"{player.name} has {player.health} health remaining\n")
         if player.health <= 0:
-            print(f"The {foe.name} has defeated {player.name}!!!")
+            print(f"The {foe.name} has defeated {player.name}!!! \n")
             break
 
 
@@ -99,18 +102,17 @@ def add_new_player_to_worksheet(new_player, player_worksheet):
     player_worksheet_update.append_row(new_player)
 
 
-def create_new_player():
-    """
-    Create new player
-    """
-    player.name = input("Enter username: ")
-
-
 def main():
     """
     Main function
     """
-    create_new_player()
+    player = create_player()
+    player.name = input("Enter username: \n")
+    new_id = int(player.cid) + 1
+    add_new_player = [new_id, player.name, 500, 75]
+    add_new_player_to_worksheet(add_new_player, "player")
+
+    player.intro(player.cid, player.name, player.health, player.attack_power)
 
     print("\nYou see a camp on the road.\n")
     print("Do you wish to approach it or keep riding towards town?\n")
@@ -126,17 +128,53 @@ def main():
             print("You need to enter a number")
             print()
 
-    print(f"{player.name} selected {player_choice}")
-    if player_choice == "1":
-        foe = create_foe(2)
-    else:
+    if player_choice == 1:
         foe = create_foe(3)
-    new_id = int(player.cid) + 1
-    add_new_player = [new_id, player.name, 500, 75]
-    add_new_player_to_worksheet(add_new_player, "player")
+        foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
+        start_battle(foe, player)
+        foe_two = create_foe(3)
+        foe_two.intro(foe_two.cid, foe_two.name, foe_two.health,
+                      foe_two.attack_power)
+        start_battle(foe_two, player)
+        foe_three = create_foe(4)
+        foe_three.intro(foe_three.cid, foe_three.name, foe_three.health,
+                        foe_three.attack_power)
+        start_battle(foe_three, player)
+    else:
+        foe = create_foe(2)
+        foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
+        start_battle(foe, player)
+        foe_two = create_foe(2)
+        foe_two.intro(foe_two.cid, foe_two.name, foe_two.health,
+                      foe_two.attack_power)
+        start_battle(foe_two, player)
+        foe_three = create_foe(5)
+        foe_three.intro(foe_three.cid, foe_three.name, foe_three.health,
+                        foe_three.attack_power)
+        start_battle(foe_three, player)
+
+    print("\nThe guard stops you at the gate and demand you remove your weapon. \n")
+    print("Do you wish to approach the guard or solider on horseback? \n")
+    # Validate player input choice
+    while True:
+        player_choice = input("Press 1 to attack guard or 2 to apprach soldier \n")
+
+        try:
+            player_choice = int(player_choice)
+            break
+        except ValueError:
+            print("You need to enter a number")
+            print()
+
+    if player_choice == 1:
+        foe = create_foe(4)
+    else:
+        foe = create_foe(5)
+
     player.intro(player.cid, player.name, player.health, player.attack_power)
     foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
-    start_battle(foe)
+
+    start_battle(foe, player)
 
 
 main()
