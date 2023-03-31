@@ -114,12 +114,19 @@ def main():
 
     player.intro(player.cid, player.name, player.health, player.attack_power)
 
-    print("\nYou see a camp on the road.\n")
-    print("Do you wish to approach it or keep riding towards town?\n")
+    # Get string text from google sheet
+    text_info_all = SHEET.worksheet("text")
+
+    text_one = text_info_all.cell(2, 2).value
+    text_two = text_info_all.cell(3, 2).value
+    print(text_one)
+    print(text_two)
+
     # Validate player input choice
     # https://www.youtube.com/watch?v=LUWyA3m_-r0
+    text_three = text_info_all.cell(4, 2).value
     while True:
-        player_choice = input("Press 1 to apprach camp or 2 to pass it by\n")
+        player_choice = input(text_three)
 
         try:
             player_choice = int(player_choice)
@@ -153,16 +160,15 @@ def main():
                         foe_three.attack_power)
         start_battle(foe_three, player)
 
-    # Get string text from google sheet
-    text_info_all = SHEET.worksheet("text")
-    text_one = text_info_all.cell(2, 2).value
-    print(text_one)
-    text_two = text_info_all.cell(3, 2).value
-    print(text_two)
+    text_four = text_info_all.cell(5, 2).value
+    print(text_four)
+    text_five = text_info_all.cell(6, 2).value
+    print(text_five)
 
     # Validate player input choice
+    text_six = text_info_all.cell(7, 2).value
     while True:
-        player_choice = input("Press 1 to attack guard or 2 to apprach soldier \n")
+        player_choice = input(text_six)
 
         try:
             player_choice = int(player_choice)
@@ -172,14 +178,70 @@ def main():
             print()
 
     if player_choice == 1:
-        foe = create_foe(4)
+        foe = create_foe(6)
+        foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
+        start_battle(foe, player)
+        foe_two = create_foe(7)
+        foe_two.intro(foe_two.cid, foe_two.name, foe_two.health,
+                      foe_two.attack_power)
+        start_battle(foe_two, player)
+        foe_three = create_foe(9)
+        foe_three.intro(foe_three.cid, foe_three.name, foe_three.health,
+                        foe_three.attack_power)
+        start_battle(foe_three, player)
     else:
-        foe = create_foe(5)
+        foe = create_foe(6)
+        foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
+        start_battle(foe, player)
+        foe_two = create_foe(8)
+        foe_two.intro(foe_two.cid, foe_two.name, foe_two.health,
+                      foe_two.attack_power)
+        start_battle(foe_two, player)
+        foe_three = create_foe(8)
+        foe_three.intro(foe_three.cid, foe_three.name, foe_three.health,
+                        foe_three.attack_power)
+        start_battle(foe_three, player)
 
-    player.intro(player.cid, player.name, player.health, player.attack_power)
-    foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
+    text_seven = text_info_all.cell(8, 2).value
+    print(text_seven)
+    text_eight = text_info_all.cell(9, 2).value
+    print(text_eight)
+    # Validate player input choice
+    text_nine = text_info_all.cell(10, 2).value
+    while True:
+        player_choice = input(text_nine)
 
-    start_battle(foe, player)
+        try:
+            player_choice = int(player_choice)
+            break
+        except ValueError:
+            print("You need to enter a number")
+            print()
+
+    if player_choice == 1:
+        foe = create_foe(6)
+        foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
+        start_battle(foe, player)
+        foe_two = create_foe(7)
+        foe_two.intro(foe_two.cid, foe_two.name, foe_two.health,
+                      foe_two.attack_power)
+        start_battle(foe_two, player)
+        foe_three = create_foe(9)
+        foe_three.intro(foe_three.cid, foe_three.name, foe_three.health,
+                        foe_three.attack_power)
+        start_battle(foe_three, player)
+    else:
+        foe = create_foe(6)
+        foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
+        start_battle(foe, player)
+        foe_two = create_foe(8)
+        foe_two.intro(foe_two.cid, foe_two.name, foe_two.health,
+                      foe_two.attack_power)
+        start_battle(foe_two, player)
+        foe_three = create_foe(8)
+        foe_three.intro(foe_three.cid, foe_three.name, foe_three.health,
+                        foe_three.attack_power)
+        start_battle(foe_three, player)
 
 
 main()
