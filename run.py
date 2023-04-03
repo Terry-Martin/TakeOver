@@ -91,6 +91,7 @@ def start_battle(foe, player):
         print(f"{player.name} has {player.health} health remaining\n")
         if player.health <= 0:
             print(f"The {foe.name} has defeated {player.name}!!! \n")
+            SHEET = GSPREAD_CLIENT.close("takeover")
             exit()
             # break
 
