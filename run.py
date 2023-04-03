@@ -90,8 +90,7 @@ def start_battle(foe, player):
         player.health = foe.attack(player.health, foe.attack_power)
         print(f"{player.name} has {player.health} health remaining\n")
         if player.health <= 0:
-            print(f"The {foe.name} has defeated {player.name}!!! \n")
-            
+            print(f"The {foe.name} has defeated {player.name}!!! \n")        
             exit()
             # break
 
@@ -108,6 +107,22 @@ def main():
     """
     Main function
     """
+
+    # Get string text from google sheet
+    text_info_all = SHEET.worksheet("text")
+
+    text_ten = text_info_all.cell(11, 2).value
+    text_eleven = text_info_all.cell(12, 2).value
+    text_twelve = text_info_all.cell(13, 2).value
+    text_thirteen = text_info_all.cell(14, 2).value
+
+    print(text_ten)
+    print()
+    print(text_eleven)
+    print(text_twelve)
+    print(text_thirteen)
+    print()
+
     player = create_player()
     player.name = input("Enter username: \n")
     new_id = int(player.cid) + 1
@@ -116,13 +131,12 @@ def main():
 
     player.intro(player.cid, player.name, player.health, player.attack_power)
 
-    # Get string text from google sheet
-    text_info_all = SHEET.worksheet("text")
-
     text_one = text_info_all.cell(2, 2).value
     text_two = text_info_all.cell(3, 2).value
     print(text_one)
+    print()
     print(text_two)
+    print()
 
     # Validate player input choice
     # https://www.youtube.com/watch?v=LUWyA3m_-r0
@@ -163,9 +177,12 @@ def main():
         start_battle(foe_three, player)
 
     text_four = text_info_all.cell(5, 2).value
+    print()
     print(text_four)
+    print()
     text_five = text_info_all.cell(6, 2).value
     print(text_five)
+    print()
 
     # Validate player input choice
     text_six = text_info_all.cell(7, 2).value
@@ -205,9 +222,12 @@ def main():
         start_battle(foe_three, player)
 
     text_seven = text_info_all.cell(8, 2).value
+    print()
     print(text_seven)
+    print()
     text_eight = text_info_all.cell(9, 2).value
     print(text_eight)
+    print()
     # Validate player input choice
     text_nine = text_info_all.cell(10, 2).value
     while True:
@@ -245,6 +265,5 @@ def main():
                         foe_three.attack_power)
         start_battle(foe_three, player)
 
-    
-main()
 
+main()
