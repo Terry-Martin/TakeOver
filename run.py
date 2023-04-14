@@ -1,7 +1,11 @@
 """
+Import time
+Import random
 Import google sheet
 Import adapted from LoveSandwiches example
 """
+import time
+import random
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -90,7 +94,8 @@ def start_battle(foe, player):
         player.health = foe.attack(player.health, foe.attack_power)
         print(f"{player.name} has {player.health} health remaining\n")
         if player.health <= 0:
-            print(f"The {foe.name} has defeated {player.name}!!! \n")        
+            print(f"The {foe.name} has defeated {player.name}!!! \n")
+            print("**** GAME OVER ****\n")  
             exit()
             # break
 
@@ -241,29 +246,27 @@ def main():
             print()
 
     if player_choice == 1:
-        foe = create_foe(6)
+        foe = create_foe(10)
         foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
         start_battle(foe, player)
-        foe_two = create_foe(7)
-        foe_two.intro(foe_two.cid, foe_two.name, foe_two.health,
-                      foe_two.attack_power)
-        start_battle(foe_two, player)
-        foe_three = create_foe(9)
-        foe_three.intro(foe_three.cid, foe_three.name, foe_three.health,
-                        foe_three.attack_power)
-        start_battle(foe_three, player)
     else:
-        foe = create_foe(6)
+        foe = create_foe(2)
         foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
         start_battle(foe, player)
-        foe_two = create_foe(8)
-        foe_two.intro(foe_two.cid, foe_two.name, foe_two.health,
-                      foe_two.attack_power)
-        start_battle(foe_two, player)
-        foe_three = create_foe(8)
-        foe_three.intro(foe_three.cid, foe_three.name, foe_three.health,
-                        foe_three.attack_power)
-        start_battle(foe_three, player)
+
+        print("Get ready for reaction time battle!")
+        time.sleep(1)
+        print("take out your weapon")
+        time.sleep(1)
+        print("When yu see the word GO press the enter key as fast as you can")
+        time.sleep(1)
+        print(".....GO.....")
+        time.sleep(1)
+        start_clock = time.process_time()
+        timing = input()
+        end_clock = time.process_time()
+        reaction_attack = end_clock - start_clock
+        print(reaction_attack)
 
 
 main()
