@@ -254,19 +254,21 @@ def main():
         foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
         start_battle(foe, player)
 
+        # Reaction Time fight
         print("Get ready for reaction time battle!")
         time.sleep(1)
         print("take out your weapon")
         time.sleep(1)
         print("When yu see the word GO press the enter key as fast as you can")
-        time.sleep(1)
+        time.sleep(random.randint(2, 5))
         print(".....GO.....")
-        time.sleep(1)
-        start_clock = time.process_time()
+        start_time = time.time()
         timing = input()
-        end_clock = time.process_time()
-        reaction_attack = end_clock - start_clock
-        print(reaction_attack)
+        end_time = time.time()
+
+        reaction_time = end_time - start_time
+
+        print(reaction_time)
 
 
 main()
