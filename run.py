@@ -57,10 +57,7 @@ def create_player():
     # info_test = SHEET.worksheet("player").get_all_values()
     # info_test1 = SHEET.worksheet("player").row_values(3)
 
-    # print()
-    # print(info_test1[1])
-    # exit()
-
+    # **CLEAN UP**
     player_id = player_info_all.cell(2, 1).value
     player_name = player_info_all.cell(2, 2).value
     player_health = int(player_info_all.cell(2, 3).value)
@@ -76,19 +73,12 @@ def create_foe(foe_number):
     Create foe
     """
     # Get information from google sheet for foe
-    # foe_info_all = SHEET.worksheet("foe")
 
-    info_test2 = SHEET.worksheet("foe").row_values(foe_number + 1)
-
-    # foe_id = foe_info_all.cell(foe_number, 1).value
-    # foe_name = foe_info_all.cell(foe_number, 2).value
-    # foe_health = int(foe_info_all.cell(foe_number, 3).value)
-    # foe_attack_power = int(foe_info_all.cell(foe_number, 4).value)
-
-    foe_id = info_test2[0]
-    foe_name = info_test2[1]
-    foe_health = int(info_test2[2])
-    foe_attack_power = int(info_test2[3])
+    get_foe_info = SHEET.worksheet("foe").row_values(foe_number)
+    foe_id = get_foe_info[0]
+    foe_name = get_foe_info[1]
+    foe_health = int(get_foe_info[2])
+    foe_attack_power = int(get_foe_info[3])
 
     # Create foe from Chatacter class and send back to main function
     return Character(foe_id, foe_name, foe_health, foe_attack_power)
@@ -130,18 +120,17 @@ def main():
     """
 
     # Get string text from google sheet
-    text_info_all = SHEET.worksheet("text")
+    # text_info_all = SHEET.worksheet("text")
 
-    text_ten = text_info_all.cell(11, 2).value
-    text_eleven = text_info_all.cell(12, 2).value
-    text_twelve = text_info_all.cell(13, 2).value
-    text_thirteen = text_info_all.cell(14, 2).value
-
-    print(text_ten)
+    get_text_info = SHEET.worksheet("text").col_values(2)
     print()
-    print(text_eleven)
-    print(text_twelve)
-    print(text_thirteen)
+    print(get_text_info[1])
+    print()
+    print(get_text_info[2])
+    print()
+    print(get_text_info[3])
+    print()
+    print(get_text_info[4])
     print()
 
     player = create_player()
@@ -152,18 +141,23 @@ def main():
 
     player.intro(player.cid, player.name, player.health, player.attack_power)
 
-    text_one = text_info_all.cell(2, 2).value
-    text_two = text_info_all.cell(3, 2).value
-    print(text_one)
+    print(get_text_info[5])
     print()
-    print(text_two)
+    print(get_text_info[6])
     print()
+
+    # text_one = text_info_all.cell(2, 2).value
+    # text_two = text_info_all.cell(3, 2).value
+    # print(text_one)
+    # print()
+    # print(text_two)
+    # print()
 
     # Validate player input choice
     # https://www.youtube.com/watch?v=LUWyA3m_-r0
-    text_three = text_info_all.cell(4, 2).value
+    # user_response1 = text_info_all.cell(4, 2).value
     while True:
-        player_choice = input(text_three)
+        player_choice = input(get_text_info[7])
 
         try:
             player_choice = int(player_choice)
@@ -197,19 +191,16 @@ def main():
                         foe_three.attack_power)
         start_battle(foe_three, player)
 
-    text_four = text_info_all.cell(5, 2).value
+    # text_four = text_info_all.cell(5, 2).value
     print()
-    print(text_four)
+    print(get_text_info[8])
     print()
-    text_five = text_info_all.cell(6, 2).value
-    print(text_five)
+    print(get_text_info[9])
     print()
 
     # Validate player input choice
-    text_six = text_info_all.cell(7, 2).value
     while True:
-        player_choice = input(text_six)
-
+        player_choice = input(get_text_info[10])
         try:
             player_choice = int(player_choice)
             break
@@ -242,18 +233,15 @@ def main():
                         foe_three.attack_power)
         start_battle(foe_three, player)
 
-    text_seven = text_info_all.cell(8, 2).value
     print()
-    print(text_seven)
+    print(get_text_info[11])
     print()
-    text_eight = text_info_all.cell(9, 2).value
-    print(text_eight)
+    print(get_text_info[12])
     print()
-    # Validate player input choice
-    text_nine = text_info_all.cell(10, 2).value
-    while True:
-        player_choice = input(text_nine)
 
+    # Validate player input choice
+    while True:
+        player_choice = input(get_text_info[13])
         try:
             player_choice = int(player_choice)
             break
@@ -271,19 +259,18 @@ def main():
         start_battle(foe, player)
 
         # Reaction Time fight
-        print("Get ready for reaction time battle!")
+        print(get_text_info[14])
         time.sleep(1)
-        print("take out your weapon")
+        print(get_text_info[15])
         time.sleep(1)
-        print("When yu see the word GO press the enter key as fast as you can \n")
+        print(get_text_info[16])
+        print()
         time.sleep(random.randint(2, 5))
-        print(".....GO.....")
+        print(get_text_info[17])
         start_time = time.time()
         input()
         end_time = time.time()
-
         reaction_time = end_time - start_time
-
         print(reaction_time)
 
 
