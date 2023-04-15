@@ -53,6 +53,14 @@ def create_player():
     """
     # Get information from google sheet for player
     player_info_all = SHEET.worksheet("player")
+    
+    # info_test = SHEET.worksheet("player").get_all_values()
+    # info_test1 = SHEET.worksheet("player").row_values(3)
+
+    # print()
+    # print(info_test1[1])
+    # exit()
+
     player_id = player_info_all.cell(2, 1).value
     player_name = player_info_all.cell(2, 2).value
     player_health = int(player_info_all.cell(2, 3).value)
@@ -68,11 +76,19 @@ def create_foe(foe_number):
     Create foe
     """
     # Get information from google sheet for foe
-    foe_info_all = SHEET.worksheet("foe")
-    foe_id = foe_info_all.cell(foe_number, 1).value
-    foe_name = foe_info_all.cell(foe_number, 2).value
-    foe_health = int(foe_info_all.cell(foe_number, 3).value)
-    foe_attack_power = int(foe_info_all.cell(foe_number, 4).value)
+    # foe_info_all = SHEET.worksheet("foe")
+
+    info_test2 = SHEET.worksheet("foe").row_values(foe_number + 1)
+
+    # foe_id = foe_info_all.cell(foe_number, 1).value
+    # foe_name = foe_info_all.cell(foe_number, 2).value
+    # foe_health = int(foe_info_all.cell(foe_number, 3).value)
+    # foe_attack_power = int(foe_info_all.cell(foe_number, 4).value)
+
+    foe_id = info_test2[0]
+    foe_name = info_test2[1]
+    foe_health = int(info_test2[2])
+    foe_attack_power = int(info_test2[3])
 
     # Create foe from Chatacter class and send back to main function
     return Character(foe_id, foe_name, foe_health, foe_attack_power)
@@ -259,11 +275,11 @@ def main():
         time.sleep(1)
         print("take out your weapon")
         time.sleep(1)
-        print("When yu see the word GO press the enter key as fast as you can")
+        print("When yu see the word GO press the enter key as fast as you can \n")
         time.sleep(random.randint(2, 5))
         print(".....GO.....")
         start_time = time.time()
-        timing = input()
+        input()
         end_time = time.time()
 
         reaction_time = end_time - start_time
