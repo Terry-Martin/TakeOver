@@ -53,7 +53,7 @@ def create_player():
     """
     # Get information from google sheet for player
     player_info_all = SHEET.worksheet("player")
-    
+
     # info_test = SHEET.worksheet("player").get_all_values()
     # info_test1 = SHEET.worksheet("player").row_values(3)
 
@@ -101,7 +101,7 @@ def start_battle(foe, player):
         print(f"{player.name} has {player.health} health remaining\n")
         if player.health <= 0:
             print(f"The {foe.name} has defeated {player.name}!!! \n")
-            print("**** GAME OVER ****\n")  
+            print("**** GAME OVER ****\n")
             exit()
             # break
 
@@ -114,24 +114,22 @@ def add_new_player_to_worksheet(new_player, player_worksheet):
     player_worksheet_update.append_row(new_player)
 
 
+def story_intro(story_start):
+    """
+    Display story start
+    """
+    print("\n" + story_start[1] + "\n")
+    print(story_start[2] + "\n")
+    print(story_start[3] + "\n")
+    print(story_start[4] + "\n")
+
+
 def main():
     """
     Main function
     """
-
-    # Get string text from google sheet
-    # text_info_all = SHEET.worksheet("text")
-
     get_text_info = SHEET.worksheet("text").col_values(2)
-    print()
-    print(get_text_info[1])
-    print()
-    print(get_text_info[2])
-    print()
-    print(get_text_info[3])
-    print()
-    print(get_text_info[4])
-    print()
+    story_intro(get_text_info)
 
     player = create_player()
     player.name = input("Enter username: \n")
@@ -141,17 +139,8 @@ def main():
 
     player.intro(player.cid, player.name, player.health, player.attack_power)
 
-    print(get_text_info[5])
-    print()
-    print(get_text_info[6])
-    print()
-
-    # text_one = text_info_all.cell(2, 2).value
-    # text_two = text_info_all.cell(3, 2).value
-    # print(text_one)
-    # print()
-    # print(text_two)
-    # print()
+    print(get_text_info[5] + "\n")
+    print(get_text_info[6] + "\n")
 
     # Validate player input choice
     # https://www.youtube.com/watch?v=LUWyA3m_-r0
@@ -163,8 +152,7 @@ def main():
             player_choice = int(player_choice)
             break
         except ValueError:
-            print("You need to enter a number")
-            print()
+            print("You need to enter a number" + "\n")
 
     if player_choice == 1:
         foe = create_foe(3)
@@ -192,11 +180,8 @@ def main():
         start_battle(foe_three, player)
 
     # text_four = text_info_all.cell(5, 2).value
-    print()
-    print(get_text_info[8])
-    print()
-    print(get_text_info[9])
-    print()
+    print("\n" + get_text_info[8] + "\n")
+    print(get_text_info[9] + "\n")
 
     # Validate player input choice
     while True:
@@ -205,8 +190,7 @@ def main():
             player_choice = int(player_choice)
             break
         except ValueError:
-            print("You need to enter a number")
-            print()
+            print("You need to enter a number \n")
 
     if player_choice == 1:
         foe = create_foe(6)
@@ -233,11 +217,8 @@ def main():
                         foe_three.attack_power)
         start_battle(foe_three, player)
 
-    print()
-    print(get_text_info[11])
-    print()
-    print(get_text_info[12])
-    print()
+    print("\n" + get_text_info[11] + "\n")
+    print(get_text_info[12] + "\n")
 
     # Validate player input choice
     while True:
@@ -246,8 +227,7 @@ def main():
             player_choice = int(player_choice)
             break
         except ValueError:
-            print("You need to enter a number")
-            print()
+            print("You need to enter a number \n")
 
     if player_choice == 1:
         foe = create_foe(10)
