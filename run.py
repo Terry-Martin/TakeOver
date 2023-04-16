@@ -4,10 +4,19 @@ Import random
 Import google sheet
 Import adapted from LoveSandwiches example
 """
+from colorama import Fore, Back, Style
 import time
 import random
 import gspread
 from google.oauth2.service_account import Credentials
+
+# import pyfiglet module
+import pyfiglet
+
+from colorama import just_fix_windows_console
+just_fix_windows_console()
+
+
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -249,6 +258,16 @@ def main():
     """
     Main function
     """
+
+    result = pyfiglet.figlet_format("TakeOver")
+    print(result)
+
+    print(Fore.RED + result)
+    print(Back.GREEN + 'and with a green background')
+    print(Style.DIM + 'and in dim text')
+    print(Style.RESET_ALL)
+    print('back to normal now')
+
     get_text_info = SHEET.worksheet("text").col_values(2)
     story_intro(get_text_info)
 
@@ -267,14 +286,9 @@ def main():
     # https://www.youtube.com/watch?v=LUWyA3m_-r0
     # user_response1 = text_info_all.cell(4, 2).value
 
-    decision_tree = 1
-    decision(decision_tree, player)
-
-    decision_tree = 2
-    decision(decision_tree, player)
-
-    decision_tree = 3
-    decision(decision_tree, player)
+    decision(1, player)
+    decision(2, player)
+    decision(3, player)
 
 
 main()
