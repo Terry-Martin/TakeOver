@@ -94,7 +94,9 @@ def start_battle(foe, player):
     Start battle between player and foe
     """
     while foe.health > 0 and player.health > 0:
-        print(f"{player.name} has dealt {player.attack_power} damage")
+    
+        print(Fore.RED + f"{player.name} has dealt {player.attack_power} damage")
+        print(Style.RESET_ALL)
         foe.health = player.attack(foe.health, player.attack_power)
         print(f"{foe.name} has {foe.health} health remaining\n")
         if foe.health <= 0:
@@ -103,10 +105,12 @@ def start_battle(foe, player):
 
         print(f"{foe.name} has dealt {foe.attack_power} damage")
         player.health = foe.attack(player.health, foe.attack_power)
-        print(f"{player.name} has {player.health} health remaining\n")
+        print(Fore.GREEN + f"{player.name} has {player.health} health remaining\n")
+        print(Style.RESET_ALL)
         if player.health <= 0:
             print(f"The {foe.name} has defeated {player.name}!!! \n")
             print("**** GAME OVER ****\n")
+            print(Style.RESET_ALL)
             exit()
             # break
 
@@ -123,6 +127,18 @@ def story_intro(story_start):
     """
     Display story start
     """
+    # https://pypi.org/project/colorama/
+    result = pyfiglet.figlet_format("TakeOver")
+    print(Style.BRIGHT + result)
+
+    print(Fore.RED + result)
+    # print(Back.GREEN + 'and with a green background')
+    # print(Style.DIM + 'and in dim text')
+    # print(Style.RESET_ALL)
+    # print(Style.BRIGHT + 'and in bright text')
+    # print(Style.RESET_ALL)
+    print(Back.BLUE)
+
     print("\n" + story_start[1] + "\n")
     print(story_start[2] + "\n")
     print(story_start[3] + "\n")
@@ -255,15 +271,6 @@ def main():
     Main function
     """
 
-    result = pyfiglet.figlet_format("TakeOver")
-    print(result)
-
-    print(Fore.RED + result)
-    print(Back.GREEN + 'and with a green background')
-    print(Style.DIM + 'and in dim text')
-    print(Style.RESET_ALL)
-    print('back to normal now')
-
     get_text_info = SHEET.worksheet("text").col_values(2)
     story_intro(get_text_info)
 
@@ -285,6 +292,7 @@ def main():
     decision(1, player)
     decision(2, player)
     decision(3, player)
+    print(Style.RESET_ALL)
 
 
 main()
