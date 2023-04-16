@@ -4,19 +4,15 @@ Import random
 Import google sheet
 Import adapted from LoveSandwiches example
 """
-from colorama import Fore, Back, Style
 import time
 import random
+import pyfiglet
 import gspread
 from google.oauth2.service_account import Credentials
-
-# import pyfiglet module
-import pyfiglet
-
+from colorama import Fore, Back, Style
 from colorama import just_fix_windows_console
 just_fix_windows_console()
-
-
+# import pyfiglet module
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
