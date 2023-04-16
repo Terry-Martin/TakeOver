@@ -124,6 +124,127 @@ def story_intro(story_start):
     print(story_start[4] + "\n")
 
 
+def decision(decision_tree, player):
+    """
+    Testtesttest
+    """
+    get_text_info = SHEET.worksheet("text").col_values(2)
+
+    if decision_tree == 1:
+        while True:
+            player_choice = input(get_text_info[7])
+
+            try:
+                player_choice = int(player_choice)
+                break
+            except ValueError:
+                print("You need to enter a number" + "\n")
+
+        if player_choice == 1:
+            foe = create_foe(3)
+            foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
+            start_battle(foe, player)
+
+            foe_two = create_foe(3)
+            foe_two.intro(foe_two.cid, foe_two.name, foe_two.health,
+                          foe_two.attack_power)
+            start_battle(foe_two, player)
+
+            foe_three = create_foe(4)
+            foe_three.intro(foe_three.cid, foe_three.name, foe_three.health,
+                            foe_three.attack_power)
+            start_battle(foe_three, player)
+        else:
+            foe = create_foe(2)
+            foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
+            start_battle(foe, player)
+
+            foe_two = create_foe(2)
+            foe_two.intro(foe_two.cid, foe_two.name, foe_two.health,
+                          foe_two.attack_power)
+            start_battle(foe_two, player)
+
+            foe_three = create_foe(5)
+            foe_three.intro(foe_three.cid, foe_three.name, foe_three.health,
+                            foe_three.attack_power)
+            start_battle(foe_three, player)
+
+        print("\n" + get_text_info[8] + "\n")
+        print(get_text_info[9] + "\n")
+
+    elif decision_tree == 2:
+        # Validate player input choice
+        while True:
+            player_choice = input(get_text_info[10])
+            try:
+                player_choice = int(player_choice)
+                break
+            except ValueError:
+                print("You need to enter a number \n")
+
+        if player_choice == 1:
+            foe = create_foe(6)
+            foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
+            start_battle(foe, player)
+            foe_two = create_foe(7)
+            foe_two.intro(foe_two.cid, foe_two.name, foe_two.health,
+                          foe_two.attack_power)
+            start_battle(foe_two, player)
+            foe_three = create_foe(9)
+            foe_three.intro(foe_three.cid, foe_three.name, foe_three.health,
+                            foe_three.attack_power)
+            start_battle(foe_three, player)
+        else:
+            foe = create_foe(6)
+            foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
+            start_battle(foe, player)
+            foe_two = create_foe(8)
+            foe_two.intro(foe_two.cid, foe_two.name, foe_two.health,
+                          foe_two.attack_power)
+            start_battle(foe_two, player)
+            foe_three = create_foe(8)
+            foe_three.intro(foe_three.cid, foe_three.name, foe_three.health,
+                            foe_three.attack_power)
+            start_battle(foe_three, player)
+
+        print("\n" + get_text_info[11] + "\n")
+        print(get_text_info[12] + "\n")
+
+    elif decision_tree == 3:
+        # Validate player input choice
+        while True:
+            player_choice = input(get_text_info[13])
+            try:
+                player_choice = int(player_choice)
+                break
+            except ValueError:
+                print("You need to enter a number \n")
+
+        if player_choice == 1:
+            foe = create_foe(10)
+            foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
+            start_battle(foe, player)
+        else:
+            foe = create_foe(2)
+            foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
+            start_battle(foe, player)
+
+            # Reaction Time fight
+            print(get_text_info[14])
+            time.sleep(1)
+            print(get_text_info[15])
+            time.sleep(1)
+            print(get_text_info[16])
+            print()
+            time.sleep(random.randint(2, 5))
+            print(get_text_info[17])
+            start_time = time.time()
+            input()
+            end_time = time.time()
+            reaction_time = end_time - start_time
+            print(reaction_time)
+
+
 def main():
     """
     Main function
@@ -145,113 +266,15 @@ def main():
     # Validate player input choice
     # https://www.youtube.com/watch?v=LUWyA3m_-r0
     # user_response1 = text_info_all.cell(4, 2).value
-    while True:
-        player_choice = input(get_text_info[7])
 
-        try:
-            player_choice = int(player_choice)
-            break
-        except ValueError:
-            print("You need to enter a number" + "\n")
+    decision_tree = 1
+    decision(decision_tree, player)
 
-    if player_choice == 1:
-        foe = create_foe(3)
-        foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
-        start_battle(foe, player)
-        foe_two = create_foe(3)
-        foe_two.intro(foe_two.cid, foe_two.name, foe_two.health,
-                      foe_two.attack_power)
-        start_battle(foe_two, player)
-        foe_three = create_foe(4)
-        foe_three.intro(foe_three.cid, foe_three.name, foe_three.health,
-                        foe_three.attack_power)
-        start_battle(foe_three, player)
-    else:
-        foe = create_foe(2)
-        foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
-        start_battle(foe, player)
-        foe_two = create_foe(2)
-        foe_two.intro(foe_two.cid, foe_two.name, foe_two.health,
-                      foe_two.attack_power)
-        start_battle(foe_two, player)
-        foe_three = create_foe(5)
-        foe_three.intro(foe_three.cid, foe_three.name, foe_three.health,
-                        foe_three.attack_power)
-        start_battle(foe_three, player)
+    decision_tree = 2
+    decision(decision_tree, player)
 
-    # text_four = text_info_all.cell(5, 2).value
-    print("\n" + get_text_info[8] + "\n")
-    print(get_text_info[9] + "\n")
-
-    # Validate player input choice
-    while True:
-        player_choice = input(get_text_info[10])
-        try:
-            player_choice = int(player_choice)
-            break
-        except ValueError:
-            print("You need to enter a number \n")
-
-    if player_choice == 1:
-        foe = create_foe(6)
-        foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
-        start_battle(foe, player)
-        foe_two = create_foe(7)
-        foe_two.intro(foe_two.cid, foe_two.name, foe_two.health,
-                      foe_two.attack_power)
-        start_battle(foe_two, player)
-        foe_three = create_foe(9)
-        foe_three.intro(foe_three.cid, foe_three.name, foe_three.health,
-                        foe_three.attack_power)
-        start_battle(foe_three, player)
-    else:
-        foe = create_foe(6)
-        foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
-        start_battle(foe, player)
-        foe_two = create_foe(8)
-        foe_two.intro(foe_two.cid, foe_two.name, foe_two.health,
-                      foe_two.attack_power)
-        start_battle(foe_two, player)
-        foe_three = create_foe(8)
-        foe_three.intro(foe_three.cid, foe_three.name, foe_three.health,
-                        foe_three.attack_power)
-        start_battle(foe_three, player)
-
-    print("\n" + get_text_info[11] + "\n")
-    print(get_text_info[12] + "\n")
-
-    # Validate player input choice
-    while True:
-        player_choice = input(get_text_info[13])
-        try:
-            player_choice = int(player_choice)
-            break
-        except ValueError:
-            print("You need to enter a number \n")
-
-    if player_choice == 1:
-        foe = create_foe(10)
-        foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
-        start_battle(foe, player)
-    else:
-        foe = create_foe(2)
-        foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
-        start_battle(foe, player)
-
-        # Reaction Time fight
-        print(get_text_info[14])
-        time.sleep(1)
-        print(get_text_info[15])
-        time.sleep(1)
-        print(get_text_info[16])
-        print()
-        time.sleep(random.randint(2, 5))
-        print(get_text_info[17])
-        start_time = time.time()
-        input()
-        end_time = time.time()
-        reaction_time = end_time - start_time
-        print(reaction_time)
+    decision_tree = 3
+    decision(decision_tree, player)
 
 
 main()
