@@ -46,10 +46,10 @@ class Character:
         """
         Display information about character
         """
-        print(f"My name is {name}.")
-        print(f"The number {cid} is tattoed on my arm.")
-        print(f"My health is {health}.")
-        print(f"My attack power is {attack_power}.\n")
+        print(f"  My name is {name}.")
+        print(f"  The number {cid} is tattoed on my arm.")
+        print(f"  My health is {health}.")
+        print(f"  My attack power is {attack_power}.\n")
 
 
 def create_player():
@@ -95,22 +95,24 @@ def start_battle(foe, player):
     """
     while foe.health > 0 and player.health > 0:
     
-        print(Fore.RED + f"{player.name} has dealt {player.attack_power} damage")
-        print(Style.RESET_ALL)
+        print(Fore.RED + f"  {player.name} has dealt {player.attack_power} damage")
+        print(Fore.WHITE)
+        # print(Style.RESET_ALL)
         foe.health = player.attack(foe.health, player.attack_power)
-        print(f"{foe.name} has {foe.health} health remaining\n")
+        print(f"  {foe.name} has {foe.health} health remaining\n")
         if foe.health <= 0:
-            print(f"{player.name} has defeated the {foe.name}!!! \n")
+            print(f"  {player.name} has defeated the {foe.name}!!! \n")
             break
 
-        print(f"{foe.name} has dealt {foe.attack_power} damage")
+        print(f"  {foe.name} has dealt {foe.attack_power} damage")
         player.health = foe.attack(player.health, foe.attack_power)
-        print(Fore.GREEN + f"{player.name} has {player.health} health remaining\n")
-        print(Style.RESET_ALL)
+        print(Fore.GREEN + f"  {player.name} has {player.health} health remaining\n")
+        print(Fore.WHITE)
         if player.health <= 0:
-            print(f"The {foe.name} has defeated {player.name}!!! \n")
-            print("**** GAME OVER ****\n")
+            print(f"  The {foe.name} has defeated {player.name}!!! \n")
+            print(Back.RED + "  **** GAME OVER ****")
             print(Style.RESET_ALL)
+            print()
             exit()
             # break
 
@@ -129,15 +131,17 @@ def story_intro(story_start):
     """
     # https://pypi.org/project/colorama/
     result = pyfiglet.figlet_format("TakeOver")
-    print(Style.BRIGHT + result)
+    # print(Style.BRIGHT + result)
+    print(result)
 
     print(Fore.RED + result)
+   
     # print(Back.GREEN + 'and with a green background')
     # print(Style.DIM + 'and in dim text')
-    # print(Style.RESET_ALL)
+    print(Style.RESET_ALL)
     # print(Style.BRIGHT + 'and in bright text')
     # print(Style.RESET_ALL)
-    print(Back.BLUE)
+    # print(Back.BLUE)
 
     print("\n" + story_start[1] + "\n")
     print(story_start[2] + "\n")
@@ -159,7 +163,7 @@ def decision(decision_tree, player):
                 player_choice = int(player_choice)
                 break
             except ValueError:
-                print("You need to enter a number" + "\n")
+                print("  You need to enter a number" + "\n")
 
         if player_choice == 1:
             foe = create_foe(3)
@@ -201,7 +205,7 @@ def decision(decision_tree, player):
                 player_choice = int(player_choice)
                 break
             except ValueError:
-                print("You need to enter a number \n")
+                print("  You need to enter a number \n")
 
         if player_choice == 1:
             foe = create_foe(6)
@@ -239,7 +243,7 @@ def decision(decision_tree, player):
                 player_choice = int(player_choice)
                 break
             except ValueError:
-                print("You need to enter a number \n")
+                print("  You need to enter a number \n")
 
         if player_choice == 1:
             foe = create_foe(10)
@@ -270,12 +274,13 @@ def main():
     """
     Main function
     """
-
+    print(Style.RESET_ALL)
+    print(Fore.WHITE)
     get_text_info = SHEET.worksheet("text").col_values(2)
     story_intro(get_text_info)
 
     player = create_player()
-    player.name = input("Enter username: \n")
+    player.name = input("  Enter username: ")
     new_id = int(player.cid) + 1
     add_new_player = [new_id, player.name, 500, 75]
     add_new_player_to_worksheet(add_new_player, "player")
@@ -293,6 +298,8 @@ def main():
     decision(2, player)
     decision(3, player)
     print(Style.RESET_ALL)
+    exit()
 
 
+print(Style.RESET_ALL)
 main()
