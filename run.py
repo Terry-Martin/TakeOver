@@ -12,6 +12,7 @@ from google.oauth2.service_account import Credentials
 from colorama import Fore, Back, Style
 from colorama import just_fix_windows_console
 just_fix_windows_console()
+
 # import pyfiglet module
 
 SCOPE = [
@@ -94,8 +95,9 @@ def start_battle(foe, player):
     Start battle between player and foe
     """
     while foe.health > 0 and player.health > 0:
-    
-        print(Fore.RED + f"  {player.name} has dealt {player.attack_power} damage")
+
+        print(Fore.RED + f"  {player.name} has dealt {player.attack_power}" +
+              " damage")
         print(Fore.WHITE)
         # print(Style.RESET_ALL)
         foe.health = player.attack(foe.health, player.attack_power)
@@ -106,15 +108,18 @@ def start_battle(foe, player):
 
         print(f"  {foe.name} has dealt {foe.attack_power} damage")
         player.health = foe.attack(player.health, foe.attack_power)
-        print(Fore.GREEN + f"  {player.name} has {player.health} health remaining\n")
+        print(Fore.GREEN + f"  {player.name} has {player.health}" +
+              "health remaining\n")
         print(Fore.WHITE)
         if player.health <= 0:
             print(f"  The {foe.name} has defeated {player.name}!!! \n")
             print(Back.RED + "  **** GAME OVER ****")
             print(Style.RESET_ALL)
             print()
-            exit()
+            # exit()
             # break
+            # os.execv(__file__, sys.argv)
+            main()
 
 
 def add_new_player_to_worksheet(new_player, player_worksheet):
@@ -135,10 +140,11 @@ def story_intro(story_start):
     print(result)
 
     print(Fore.RED + result)
-   
+    print(Fore.WHITE)
+
     # print(Back.GREEN + 'and with a green background')
     # print(Style.DIM + 'and in dim text')
-    print(Style.RESET_ALL)
+    # print(Style.RESET_ALL)
     # print(Style.BRIGHT + 'and in bright text')
     # print(Style.RESET_ALL)
     # print(Back.BLUE)
@@ -266,8 +272,18 @@ def decision(decision_tree, player):
             start_time = time.time()
             input()
             end_time = time.time()
-            reaction_time = end_time - start_time
-            print(reaction_time)
+            player_reaction_time = end_time - start_time
+            foe_reaction_time = 0.4
+
+            print(player_reaction_time)
+            print(foe_reaction_time)
+
+            if player_reaction_time <= foe_reaction_time:
+                print(f"You take out the {foe.name} with one clean hit")
+            else:
+                print(f"{foe.name} gets in a quick attack")
+
+            print(player_reaction_time)
 
 
 def main():
@@ -298,8 +314,9 @@ def main():
     decision(2, player)
     decision(3, player)
     print(Style.RESET_ALL)
-    exit()
+    # exit()
+    # os.execv(__file__, sys.argv)
+    main()
 
 
-print(Style.RESET_ALL)
 main()
