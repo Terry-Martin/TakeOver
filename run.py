@@ -24,6 +24,10 @@ CREDS = Credentials.from_service_account_file("creds.json")
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open("takeover")
+DELAY_1 = 1
+DELAY_2 = 2
+DELAY_3 = 3
+DELAY_4 = 4
 
 
 class Character:
@@ -47,10 +51,12 @@ class Character:
         """
         Display information about character
         """
+        DELAY_1 = 1
         print(f"  My name is {name}.")
         print(f"  The number {cid} is tattoed on my arm.")
         print(f"  My health is {health}.")
         print(f"  My attack power is {attack_power}.\n")
+        DELAY_1 = 1
 
 
 def create_player():
@@ -59,9 +65,6 @@ def create_player():
     """
     # Get information from google sheet for player
     player_info_all = SHEET.worksheet("player")
-
-    # info_test = SHEET.worksheet("player").get_all_values()
-    # info_test1 = SHEET.worksheet("player").row_values(3)
 
     # **CLEAN UP**
     player_id = player_info_all.cell(2, 1).value
@@ -99,7 +102,6 @@ def start_battle(foe, player):
         print(Fore.RED + f"  {player.name} has dealt {player.attack_power}" +
               " damage")
         print(Fore.WHITE)
-        # print(Style.RESET_ALL)
         foe.health = player.attack(foe.health, player.attack_power)
         print(f"  {foe.name} has {foe.health} health remaining\n")
         if foe.health <= 0:
@@ -109,16 +111,14 @@ def start_battle(foe, player):
         print(f"  {foe.name} has dealt {foe.attack_power} damage")
         player.health = foe.attack(player.health, foe.attack_power)
         print(Fore.GREEN + f"  {player.name} has {player.health}" +
-              "health remaining\n")
+              " health remaining\n")
         print(Fore.WHITE)
         if player.health <= 0:
             print(f"  The {foe.name} has defeated {player.name}!!! \n")
-            print(Back.RED + "  **** GAME OVER ****")
-            print(Style.RESET_ALL)
-            print()
-            # exit()
-            # break
-            # os.execv(__file__, sys.argv)
+
+            game_over = pyfiglet.figlet_format("GAME OVER")
+            print(Fore.RED + game_over)
+            print(Fore.WHITE)
             main()
 
 
@@ -149,9 +149,14 @@ def story_intro(story_start):
     # print(Style.RESET_ALL)
     # print(Back.BLUE)
 
+    # Time delay idea from classmate Darragh Lynch
+    time.sleep(DELAY_1)
     print("\n" + story_start[1] + "\n")
+    time.sleep(DELAY_2)
     print(story_start[2] + "\n")
+    time.sleep(DELAY_2)
     print(story_start[3] + "\n")
+    time.sleep(DELAY_2)
     print(story_start[4] + "\n")
 
 
@@ -199,9 +204,11 @@ def decision(decision_tree, player):
             foe_three.intro(foe_three.cid, foe_three.name, foe_three.health,
                             foe_three.attack_power)
             start_battle(foe_three, player)
-
+        time.sleep(DELAY_1)
         print("\n" + get_text_info[8] + "\n")
+        time.sleep(DELAY_1)
         print(get_text_info[9] + "\n")
+        time.sleep(DELAY_1)
 
     elif decision_tree == 2:
         # Validate player input choice
@@ -237,9 +244,11 @@ def decision(decision_tree, player):
             foe_three.intro(foe_three.cid, foe_three.name, foe_three.health,
                             foe_three.attack_power)
             start_battle(foe_three, player)
-
+        time.sleep(DELAY_1)
         print("\n" + get_text_info[11] + "\n")
+        time.sleep(DELAY_1)
         print(get_text_info[12] + "\n")
+        time.sleep(DELAY_1)
 
     elif decision_tree == 3:
         # Validate player input choice
@@ -256,15 +265,15 @@ def decision(decision_tree, player):
             foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
             start_battle(foe, player)
         else:
-            foe = create_foe(2)
+            foe = create_foe(11)
             foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
-            start_battle(foe, player)
+            # start_battle(foe, player)
 
             # Reaction Time fight
             print(get_text_info[14])
-            time.sleep(1)
+            time.sleep(DELAY_1)
             print(get_text_info[15])
-            time.sleep(1)
+            time.sleep(DELAY_1)
             print(get_text_info[16])
             print()
             time.sleep(random.randint(2, 5))
@@ -274,16 +283,41 @@ def decision(decision_tree, player):
             end_time = time.time()
             player_reaction_time = end_time - start_time
             foe_reaction_time = 0.4
-
-            print(player_reaction_time)
-            print(foe_reaction_time)
+            
+            time.sleep(DELAY_1)
+            print(f"Your reaction time was {player_reaction_time}")
+            print(f"{foe.name} reaction time was {foe_reaction_time}")
+            time.sleep(DELAY_1)
 
             if player_reaction_time <= foe_reaction_time:
                 print(f"You take out the {foe.name} with one clean hit")
+                foe.health = 0
+                print(Fore.GREEN + f"  {player.name} has {player.health}" +
+                      " health remaining\n")
+                time.sleep(DELAY_1)
             else:
                 print(f"{foe.name} gets in a quick attack")
+                player.health = player.health - 200
+                print(Fore.GREEN + f"  {player.name} has {player.health}" +
+                      " health remaining\n")
+                time.sleep(DELAY_1)
+                if player.health <= 0:                
+                    # print("***GAME OVER***")
+                    game_over = pyfiglet.figlet_format("GAME OVER")
+                    print(Fore.RED + game_over)
+                    print(Fore.WHITE)
+                    time.sleep(DELAY_3)
+                    main()
 
-            print(player_reaction_time)
+
+def boss_battle():
+    """
+    Final battle
+    """
+    time.sleep(DELAY_1)
+    get_text_info = SHEET.worksheet("text").col_values(2)
+    print(get_text_info[18] + "\n")
+    time.sleep(DELAY_1)
 
 
 def main():
@@ -296,6 +330,7 @@ def main():
     story_intro(get_text_info)
 
     player = create_player()
+    time.sleep(DELAY_1)
     player.name = input("  Enter username: ")
     new_id = int(player.cid) + 1
     add_new_player = [new_id, player.name, 500, 75]
@@ -303,7 +338,9 @@ def main():
 
     player.intro(player.cid, player.name, player.health, player.attack_power)
 
+    time.sleep(DELAY_1)
     print(get_text_info[5] + "\n")
+    time.sleep(DELAY_1)
     print(get_text_info[6] + "\n")
 
     # Validate player input choice
@@ -313,9 +350,9 @@ def main():
     decision(1, player)
     decision(2, player)
     decision(3, player)
+    boss_battle()
     print(Style.RESET_ALL)
     # exit()
-    # os.execv(__file__, sys.argv)
     main()
 
 
