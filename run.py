@@ -328,6 +328,7 @@ def main():
     story_intro(get_text_info)
 
     enter_name = input("  Enter username: ")
+    print(enter_name)
 
     # create new played from character class
     player = create_player()
@@ -336,11 +337,11 @@ def main():
     time.sleep(DELAY_1)
 
     # Add the new player details to google worksheet
-    add_new_player = [player.cid, player.name, player.health, player.attack]
-    add_new_player_to_worksheet(add_new_player, "player")
+    # add_new_player = [player.cid, player.name, player.health, player.attack]
+    # add_new_player_to_worksheet(add_new_player, "player")
 
     # Display player information
-    player.intro(player.cid, player.name, player.health, player.attack_power)
+    # player.intro(player.cid, player.name, player.health, player.attack_power)
 
     time.sleep(DELAY_1)
     print(get_text_info[5] + "\n")
