@@ -51,12 +51,11 @@ class Character:
         """
         Display information about character
         """
-        DELAY_1 = 1
-        print(f"  My name is {name}.")
-        print(f"  The number {cid} is tattoed on my arm.")
-        print(f"  My health is {health}.")
-        print(f"  My attack power is {attack_power}.\n")
-        DELAY_1 = 1
+        time.sleep(DELAY_1)
+        print(f"  Your name is {name}.")
+        print(f"  {cid}Your current health is {health}.")
+        print(f"  Your attack power is {attack_power}.\n")
+        time.sleep(DELAY_1)
 
 
 def create_player():
@@ -66,11 +65,14 @@ def create_player():
     # Get information from google sheet for player
     player_info_all = SHEET.worksheet("player")
 
-    # **CLEAN UP**
-    player_id = player_info_all.cell(2, 1).value
+    get_player_info = SHEET.worksheet("player").col_values(1)
+
+    # Get new id number which is 1 higher than previous id number
+    player_id = (len(get_player_info)) - 1
     player_name = player_info_all.cell(2, 2).value
-    player_health = int(player_info_all.cell(2, 3).value)
-    player_attack_power = int(player_info_all.cell(2, 4).value)
+    # player_name = new_name
+    player_health = 500
+    player_attack_power = 75
 
     # Create player from Character class
     return Character(player_id, player_name, player_health,
@@ -106,6 +108,7 @@ def start_battle(foe, player):
         print(f"  {foe.name} has {foe.health} health remaining\n")
         if foe.health <= 0:
             print(f"  {player.name} has defeated the {foe.name}!!! \n")
+            time.sleep(DELAY_2)
             break
 
         print(f"  {foe.name} has dealt {foe.attack_power} damage")
@@ -115,7 +118,7 @@ def start_battle(foe, player):
         print(Fore.WHITE)
         if player.health <= 0:
             print(f"  The {foe.name} has defeated {player.name}!!! \n")
-
+            time.sleep(DELAY_1)
             game_over = pyfiglet.figlet_format("GAME OVER")
             print(Fore.RED + game_over)
             print(Fore.WHITE)
@@ -136,9 +139,6 @@ def story_intro(story_start):
     """
     # https://pypi.org/project/colorama/
     result = pyfiglet.figlet_format("TakeOver")
-    # print(Style.BRIGHT + result)
-    print(result)
-
     print(Fore.RED + result)
     print(Fore.WHITE)
 
@@ -267,7 +267,6 @@ def decision(decision_tree, player):
         else:
             foe = create_foe(11)
             foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
-            # start_battle(foe, player)
 
             # Reaction Time fight
             print(get_text_info[14])
@@ -283,7 +282,6 @@ def decision(decision_tree, player):
             end_time = time.time()
             player_reaction_time = end_time - start_time
             foe_reaction_time = 0.4
-            
             time.sleep(DELAY_1)
             print(f"Your reaction time was {player_reaction_time}")
             print(f"{foe.name} reaction time was {foe_reaction_time}")
@@ -301,7 +299,7 @@ def decision(decision_tree, player):
                 print(Fore.GREEN + f"  {player.name} has {player.health}" +
                       " health remaining\n")
                 time.sleep(DELAY_1)
-                if player.health <= 0:                
+                if player.health <= 0:
                     # print("***GAME OVER***")
                     game_over = pyfiglet.figlet_format("GAME OVER")
                     print(Fore.RED + game_over)
@@ -329,13 +327,19 @@ def main():
     get_text_info = SHEET.worksheet("text").col_values(2)
     story_intro(get_text_info)
 
+    enter_name = input("  Enter username: ")
+
+    # create new played from character class
     player = create_player()
     time.sleep(DELAY_1)
-    player.name = input("  Enter username: ")
-    new_id = int(player.cid) + 1
-    add_new_player = [new_id, player.name, 500, 75]
+    print()
+    time.sleep(DELAY_1)
+
+    # Add the new player details to google worksheet
+    add_new_player = [player.cid, player.name, player.health, player.attack]
     add_new_player_to_worksheet(add_new_player, "player")
 
+    # Display player information
     player.intro(player.cid, player.name, player.health, player.attack_power)
 
     time.sleep(DELAY_1)
