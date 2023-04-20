@@ -58,21 +58,23 @@ class Character:
         time.sleep(DELAY_1)
 
 
-def create_player():
+def create_player(new_name):
     """
     Create player
     """
     # Get information from google sheet for player
-    player_info_all = SHEET.worksheet("player")
 
     get_player_info = SHEET.worksheet("player").col_values(1)
 
     # Get new id number which is 1 higher than previous id number
-    player_id = (len(get_player_info)) - 1
-    player_name = player_info_all.cell(2, 2).value
-    # player_name = new_name
+    player_id = len(get_player_info)
+    player_name = new_name
     player_health = 500
     player_attack_power = 75
+
+    # Add new player details to sheet
+    SHEET.worksheet("player").append_row([player_id, player_name,
+                                         player_health, player_attack_power])
 
     # Create player from Character class
     return Character(player_id, player_name, player_health,
@@ -107,6 +109,7 @@ def game_over():
     time.sleep(DELAY_3)
     print("Restarting game.....")
     time.sleep(DELAY_3)
+    main()
 
 
 def start_battle(foe, player):
@@ -133,25 +136,7 @@ def start_battle(foe, player):
         if player.health <= 0:
             print(f"  The {foe.name} has defeated {player.name}!!! \n")
             time.sleep(DELAY_1)
-
-            # result = pyfiglet.figlet_format("              GAME OVER")
-            # print(Back.RED)
-            # print(result)
-            # print(Style.RESET_ALL)
-            # print(Fore.WHITE)
-            # time.sleep(DELAY_3)
-            # print("Restarting game")
             game_over()
-
-            main()
-
-
-def add_new_player_to_worksheet(new_player, player_worksheet):
-    """
-    Add new player to player google sheet
-    """
-    player_worksheet_update = SHEET.worksheet(player_worksheet)
-    player_worksheet_update.append_row(new_player)
 
 
 def story_intro(story_start):
@@ -325,7 +310,6 @@ def decision(decision_tree, player):
                 time.sleep(DELAY_1)
                 if player.health <= 0:
                     game_over()
-                    main()
 
 
 def boss_battle():
@@ -348,27 +332,10 @@ def main():
     story_intro(get_text_info)
 
     enter_name = input("  Enter username: ")
-    print(enter_name)
 
     # create new played from character class
-    player = create_player()
-    time.sleep(DELAY_1)
+    player = create_player(enter_name)
     print()
-    time.sleep(DELAY_1)
-
-    # Add the new player details to google worksheet
-    # add_new_player = [player.cid, player.name, player.health, player.attack]
-    # add_new_player_to_worksheet(add_new_player, "player")
-
-
-
-
-    # Display player information
-    # player.intro(player.cid, player.name, player.health, player.attack_power)
-
-
-
-    
 
     time.sleep(DELAY_1)
     print(get_text_info[5] + "\n")
