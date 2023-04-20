@@ -387,17 +387,94 @@ def boss_battle():
     """
     Final battle
     """
+    print("Bruised, battered but feeling more blood thirsty than ever.")
+    print()
+    time.sleep(3)
+    print("Sleep does not come easy. Taking over one are of the town " +
+          "was fun but its only a start")
+    print()
+    time.sleep(3)
+    print("Perhaps tomorrow, you will visit some old frin-" +
+          "your thoughts interupted.....")
+    print()
+    time.sleep(3)
+    print("....not a noise exactly but sensing a new presence")
+    print()
+    time.sleep(3)
+    print("Not many is this wide world could get so close to you " +
+          "without you realising")
+    print()
+    time.sleep(3)
+    print("An assassin then....a damn fine one")
+    print()
+    time.sleep(3)
+    print("You have only one chance. Keep breadthing smoothly. " + 
+          "Dont even open your eyes.")
+    print()
+    time.sleep(3)
+    print("There...you hear that faint sound of a blade leaving its sheath.")
+    print()
+    time.sleep(3)
+    print("Coming from the window side. You judge it will take 7 " + 
+          "seconds for the assassin to close quietly and strike")
+    print()
+    time.sleep(3)
+    print("When you see the word    STRIKE    on screen, you must count " +
+          "to 7 and then hit the ENTER key.")
+    print()
+    time.sleep(3)
+    input("Are you ready?")
 
+    # Randon time for the word GO to appear between 2 and 5 seconds
+    time.sleep(random.randint(2, 5))
+    print("       STRIKE      ")
+    start_time = time.time()
+    input()
+    end_time = time.time()
+    # Player reaction time check against foe time
+    player_reaction_time = end_time - start_time
+    target_time = 7
     time.sleep(1)
-    get_text_info = SHEET.worksheet("text").col_values(2)
-    print(get_text_info[18] + "\n")
-    time.sleep(1)
+    # Display player and foe reaction times
+    print(f"Your reaction time was {player_reaction_time}")
+    print(f"Target time was {target_time}")
+    time.sleep(2)
+    if player_reaction_time < 0.5:
+        print("You move too quickly, striking nothing but thin air.")
+        time.sleep(3)
+        print("The assassin's stike is more accurate....Deadly accurate")
+        time.sleep(3)
+        game_over()
+    elif player_reaction_time > 7.5:
+        print("You move too slowly, barely even raising your blade.")
+        time.sleep(3)
+        print("The assassin smiling as his dagger finds your heart")
+        time.sleep(3)
+        game_over()
+    else:
+        print("Your timing flawless, fluid, breadth-taking. Your" +
+              "blade finding its target")
+        time.sleep(3)
+        print("The assassin's eyes widening in suprise and then terror.")
+        time.sleep(3)
+        print("His hands grasping his throat but it's futile.")
+        time.sleep(4)
+
+        victory = pyfiglet.figlet_format("              VICTORY!!!!")
+        print(Fore.YELLOW)
+        print(Back.BLACK)
+        print(victory)
+        print(Style.RESET_ALL)
+        print(Fore.WHITE)
 
 
 def main():
     """
     Main function to start game
     """
+
+    boss_battle()
+    exit()
 
     # Format text and display
     print(Style.RESET_ALL)
