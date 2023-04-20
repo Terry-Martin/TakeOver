@@ -95,6 +95,20 @@ def create_foe(foe_number):
     return Character(foe_id, foe_name, foe_health, foe_attack_power)
 
 
+def game_over():
+    """
+    Format game over text
+    """
+    result = pyfiglet.figlet_format("              GAME OVER")
+    print(Back.RED)
+    print(result)
+    print(Style.RESET_ALL)
+    print(Fore.WHITE)
+    time.sleep(DELAY_3)
+    print("Restarting game.....")
+    time.sleep(DELAY_3)
+
+
 def start_battle(foe, player):
     """
     Start battle between player and foe
@@ -119,9 +133,16 @@ def start_battle(foe, player):
         if player.health <= 0:
             print(f"  The {foe.name} has defeated {player.name}!!! \n")
             time.sleep(DELAY_1)
-            game_over = pyfiglet.figlet_format("GAME OVER")
-            print(Fore.RED + game_over)
-            print(Fore.WHITE)
+
+            # result = pyfiglet.figlet_format("              GAME OVER")
+            # print(Back.RED)
+            # print(result)
+            # print(Style.RESET_ALL)
+            # print(Fore.WHITE)
+            # time.sleep(DELAY_3)
+            # print("Restarting game")
+            game_over()
+
             main()
 
 
@@ -138,8 +159,11 @@ def story_intro(story_start):
     Display story start
     """
     # https://pypi.org/project/colorama/
-    result = pyfiglet.figlet_format("TakeOver")
-    print(Fore.RED + result)
+    result = pyfiglet.figlet_format("              TakeOver")
+    print(Back.BLUE)
+    print(Style.BRIGHT)
+    print(result)
+    print(Style.RESET_ALL)
     print(Fore.WHITE)
 
     # print(Back.GREEN + 'and with a green background')
@@ -300,11 +324,7 @@ def decision(decision_tree, player):
                       " health remaining\n")
                 time.sleep(DELAY_1)
                 if player.health <= 0:
-                    # print("***GAME OVER***")
-                    game_over = pyfiglet.figlet_format("GAME OVER")
-                    print(Fore.RED + game_over)
-                    print(Fore.WHITE)
-                    time.sleep(DELAY_3)
+                    game_over()
                     main()
 
 
@@ -340,8 +360,15 @@ def main():
     # add_new_player = [player.cid, player.name, player.health, player.attack]
     # add_new_player_to_worksheet(add_new_player, "player")
 
+
+
+
     # Display player information
     # player.intro(player.cid, player.name, player.health, player.attack_power)
+
+
+
+    
 
     time.sleep(DELAY_1)
     print(get_text_info[5] + "\n")
