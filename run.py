@@ -51,10 +51,11 @@ class Character:
         """
 
         time.sleep(1)
-        print(f"  Your name is {name}.")
-        print(f"  Your current health is {health}.")
-        print(f"  Your attack power is {attack_power}.\n")
-        time.sleep(1)
+        print(Fore.YELLOW)
+        print(f"  {name}'s current health is {health}.")
+        print(f"  {name}'s attack power is {attack_power}.\n")
+        print(Fore.WHITE)
+        time.sleep(3)
 
 
 def create_player(new_name):
@@ -167,13 +168,14 @@ def story_intro(story_start):
     time.sleep(1)
     # Display story intro
     # Text pulled from "text" google sheet
-    print("\n" + story_start[1] + "\n")
-    time.sleep(2)
+    # print("\n" + story_start[1] + "\n")
+    time.sleep(3)
     print(story_start[2] + "\n")
     time.sleep(2)
     print(story_start[3] + "\n")
     time.sleep(2)
     print(story_start[4] + "\n")
+    time.sleep(2)
 
 
 def decision(decision_tree, player):
@@ -261,14 +263,13 @@ def decision(decision_tree, player):
                 if player.health <= 0:
                     game_over()
 
-        time.sleep(1)
-        print("\n" + get_text_info[8] + "\n")
-        time.sleep(1)
-        print(get_text_info[9] + "\n")
-        time.sleep(1)
-
     # Second decision tree for player to make selection
     elif decision_tree == 2:
+        time.sleep(1)
+        print(get_text_info[8])
+        time.sleep(12)
+        print(get_text_info[9])
+        time.sleep(1)
         # Validate user entering a number
         while True:
             player_choice = input(get_text_info[10])
@@ -431,24 +432,25 @@ def main():
     print(Fore.WHITE)
     get_text_info = SHEET.worksheet("text").col_values(2)
     story_intro(get_text_info)
-
     # Prompt for user
     enter_name = input("  Enter username: ")
-
     # create new played from character class based on inputted username
     player = create_player(enter_name)
     print()
-
+    print("---------------------------------------------------------------")
+    player.intro(player.cid, player.name, player.health, player.attack_power)
     time.sleep(1)
     print(get_text_info[5] + "\n")
     time.sleep(1)
     print(get_text_info[6] + "\n")
-
     # https://www.youtube.com/watch?v=LUWyA3m_-r0
-
+    # Display player starting info
     decision(1, player)
+    player.intro(player.cid, player.name, player.health, player.attack_power)
     decision(2, player)
+    player.intro(player.cid, player.name, player.health, player.attack_power)
     decision(3, player)
+    player.intro(player.cid, player.name, player.health, player.attack_power)
     boss_battle()
     print(Style.RESET_ALL)
     main()
