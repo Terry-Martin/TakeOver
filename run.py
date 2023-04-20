@@ -52,7 +52,7 @@ class Character:
 
         time.sleep(1)
         print(Fore.YELLOW)
-        print(f"  {name}'s current health is {health}.")
+        print(f"  {name}'s health is {health}.")
         print(f"  {name}'s attack power is {attack_power}.\n")
         print(Fore.WHITE)
         time.sleep(3)
@@ -169,13 +169,13 @@ def story_intro(story_start):
     # Display story intro
     # Text pulled from "text" google sheet
     # print("\n" + story_start[1] + "\n")
-    time.sleep(3)
+    time.sleep(4)
     print(story_start[2] + "\n")
-    time.sleep(2)
+    time.sleep(3)
     print(story_start[3] + "\n")
-    time.sleep(2)
+    time.sleep(3)
     print(story_start[4] + "\n")
-    time.sleep(2)
+    time.sleep(3)
 
 
 def decision(decision_tree, player):
@@ -217,8 +217,8 @@ def decision(decision_tree, player):
                             foe_three.attack_power)
             start_battle(foe_three, player)
         else:
-            foe = create_foe(2)
-            foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
+            foe = create_foe(5)
+            # foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
 
             # Reaction Time fight
             # User hits enter when GO word is diplayed. Reaction time is noted
@@ -280,8 +280,8 @@ def decision(decision_tree, player):
                 print("  You need to enter a number \n")
 
         if player_choice == 1:
-            foe = create_foe(2)
-            foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
+            foe = create_foe(6)
+            # foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
 
             time.sleep(1)
             print(get_text_info[14])
@@ -325,17 +325,20 @@ def decision(decision_tree, player):
                     game_over()
 
         else:
-            foe = create_foe(5)
+            foe = create_foe(7)
             foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
             start_battle(foe, player)
-            foe_two = create_foe(6)
+
+            foe_two = create_foe(8)
             foe_two.intro(foe_two.cid, foe_two.name, foe_two.health,
                           foe_two.attack_power)
             start_battle(foe_two, player)
-            foe_three = create_foe(7)
+
+            foe_three = create_foe(9)
             foe_three.intro(foe_three.cid, foe_three.name, foe_three.health,
                             foe_three.attack_power)
             start_battle(foe_three, player)
+
         time.sleep(1)
         print("\n" + get_text_info[11] + "\n")
         time.sleep(1)
@@ -354,14 +357,14 @@ def decision(decision_tree, player):
                 print("  You need to enter a number \n")
 
         if player_choice == 1:
-            foe = create_foe(8)
+            foe = create_foe(10)
             foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
             start_battle(foe, player)
-            foe_two = create_foe(9)
+            foe_two = create_foe(12)
             foe_two.intro(foe_two.cid, foe_two.name, foe_two.health,
                           foe_two.attack_power)
             start_battle(foe_two, player)
-            foe_three = create_foe(10)
+            foe_three = create_foe(14)
             foe_three.intro(foe_three.cid, foe_three.name, foe_three.health,
                             foe_three.attack_power)
             start_battle(foe_three, player)
@@ -369,46 +372,15 @@ def decision(decision_tree, player):
         else:
             foe = create_foe(11)
             foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
-
-            # Reaction Time fight
-            # User hits enter when GO word is diplayed. Reaction time is noted
-            print(get_text_info[14])
-            time.sleep(1)
-            print(get_text_info[15])
-            time.sleep(1)
-            print(get_text_info[16])
-            print()
-            # Randon time for the word GO to appear between 2 and 5 seconds
-            time.sleep(random.randint(2, 5))
-            print(get_text_info[17])
-            start_time = time.time()
-            input()
-            end_time = time.time()
-            # Player reaction time check against foe time
-            player_reaction_time = end_time - start_time
-            foe_reaction_time = 0.4
-            time.sleep(1)
-            # Display player and foe reaction times
-            print(f"Your reaction time was {player_reaction_time}")
-            print(f"{foe.name} reaction time was {foe_reaction_time}")
-            time.sleep(1)
-
-            # Foe defeated if player reaction time is faster
-            if player_reaction_time <= foe_reaction_time:
-                print(f"You take out the {foe.name} with one clean hit")
-                foe.health = 0
-                print(Fore.GREEN + f"  {player.name} has {player.health}" +
-                      " health remaining\n")
-                time.sleep(1)
-            # Player takes 200 damage if foe reaction time is faster
-            else:
-                print(f"{foe.name} gets in a quick attack")
-                player.health = player.health - 200
-                print(Fore.GREEN + f"  {player.name} has {player.health}" +
-                      " health remaining\n")
-                time.sleep(1)
-                if player.health <= 0:
-                    game_over()
+            start_battle(foe, player)
+            foe_two = create_foe(13)
+            foe_two.intro(foe_two.cid, foe_two.name, foe_two.health,
+                          foe_two.attack_power)
+            start_battle(foe_two, player)
+            foe_three = create_foe(15)
+            foe_three.intro(foe_three.cid, foe_three.name, foe_three.health,
+                            foe_three.attack_power)
+            start_battle(foe_three, player)
 
 
 def boss_battle():
