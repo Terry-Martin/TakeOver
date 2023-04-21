@@ -408,14 +408,14 @@ def boss_battle():
     print("An assassin then....a damn fine one")
     print()
     time.sleep(3)
-    print("You have only one chance. Keep breadthing smoothly. " + 
+    print("You have only one chance. Keep breadthing smoothly. " +
           "Dont even open your eyes.")
     print()
     time.sleep(3)
     print("There...you hear that faint sound of a blade leaving its sheath.")
     print()
     time.sleep(3)
-    print("Coming from the window side. You judge it will take 7 " + 
+    print("Coming from the window side. You judge it will take 7 " +
           "seconds for the assassin to close quietly and strike")
     print()
     time.sleep(3)
@@ -472,9 +472,6 @@ def main():
     """
     Main function to start game
     """
-
-    boss_battle()
-    exit()
 
     # Format text and display
     print(Style.RESET_ALL)

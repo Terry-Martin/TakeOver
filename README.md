@@ -1,9 +1,8 @@
 # TakeOver
 (Developer: Terry Martin)
 
-![Mockup image](assets/images/readme_images/am-i-responsive.jpg)
 
-[Live webpage](https://terry-martin.github.io/ChasingDreams/)
+[Live webpage](https://takeover-terry-martin.herokuapp.com/)
 
 ## Table Of Contents
 
@@ -11,9 +10,9 @@
     1. [Creator Goals](#creator-goals)
     2. [Player Goals](#player-goals)
 2. [Game Info](#game-info)
-    1. [Game Themes](#game-themes)
-    2. [Game Ideas](#game-ideas)
-    3. [Game Basics](#game-basics)
+    1. [Game Story](#game-story)
+    2. [Game Basics](#game-basics)
+    3. [Flow Chart](#flow-chart)
 3. [User Experience](#user-experience)
     1. [Target Audience](#target-audience)
     2. [User Requrements and Expectations](#user-requirements-and-expectations)
@@ -21,9 +20,6 @@
 4. [Design](#design)
     1. [Design Choices](#design-choices)
     2. [Colour](#colour)
-    3. [Fonts](#fonts)
-    4. [Structure](#structure)
-    5. [Wireframes](#wireframes)
 5. [Technologies Used](#technologies-used)
     1. [Languages](#languages)
     2. [Frameworks and Tools](#frameworks-and-tools)
@@ -36,53 +32,58 @@
     5. [Device testing](#performing-tests-on-various-devices)
     6. [Browser compatibility](#browser-compatability)
 8. [Bugs](#Bugs)
-9. [Deplyment](#deplyment)
+9. [Deployment](#deplyment)
 10. [Credits](#credits)
 11. [Acknowledgements](#acknowledgements)
 
 ## Project Goals
 
 ### Creator Goals
-- Build on HTML and CSS learnings
-- Include JavaScript for interactivity and feedback
-- Create a game about Dreams incorporating the above three languages
-- Allow user to read and answer questions about dream songs
+- Build a python project
+- Create a game about taking over a town
+- Allow user to input name and make selections based on story questions
 - Give user a chance to complete game under certain conditions
-- Keep tight control of which buttons are available to user to reduce bugs
-- Direct the users focus to what they should do next
+- Display relevant info to user at correct time
+- Two main battle types - Auto and Reaction time
+- Final battle with change to Reaction time battle
 
 
 ### Player Goals
-- Input answers to questions
-- View current score/stats
-- Receive feedback if a question is right or wrong and see overall progress
-- Be made aware of target needed to complete game
-- Obtain knowlege of game functions through feedback
+- Read story and options
+- Enter name
+- Virew foe info
+- Make selections
+- View current health
+- Respond to reaction time battles
+- CHance to defeat final boss
+- Retry game after defeat
 
 ## Game Info
 
-### Game Themes
-- Sleep is the main theme of the game with the goal of achiving eight hours of it. Eight hours is something we are all told is a solid target for us to have healthy lives. However, that eight hours is elusive to most of us because of busy lives or busy brains.
-- Dreams are sometimes said to be guardians of sleep. The longer we dream, the longer we sleep.
-- Pysical comfort and mental relaxion assist us in having a deeper calmer sleep. Feeling cosy and carefree is another way to put this, so perhaps the idea of ourselves wrapped in our favourite jumper or having a super comfy pillow under our head can help us sleep that tad longer...
-
-### Game Ideas
-- Player is given a target of 8 hours sleep to complete them game
-- Game itself is a quiz with missing song lyrics
-- Each question answered counts as 1 hour of sleep. So, 8 questions to finish the game
-- Player is given a Sleep Depth score at start of game. This number will go up or down depending on answers to quiz
-- Sleep Depth is also affected by random, external factors (such as neighbours dog is barking)
-- Players can find items that increase or decrease their Sleep Depth (such as Dream Jumper)
-- If Sleep Depth reaches zero, the player will wake up
+### Game story
+- You are a born survivor and a seasoned warrior. Weary of seeing the corrupt politians and greedy landowners thrive on he back of your blood and sweat.
+- No longer willing to take orders for pitiful payouts
+- Its time to put your skills and charisma to the test and seat yourself at the top of the table.
+- Determined to crush anyone that dares to stand in your way
 
 ### Game Basics
-- User will read a short intro and then be invited to click a "Start Dreaming" button
-- User will have a view of Missing Song Lyric (Question and Answer Box), Player Info, Sleep Info and Player Items
-- Missing Song Lyric will contain 4 lines of a song. One word will be blanked out with red underline in its place
-- A question is displayed directly below the song about the missing lyric. The user will be told how many letters are in the missing word
-- User will type in text box and will receive feedback if the answer is correct or incorrect.
-- Player Info (showing name and player stats), Sleep Info (showing current progress of how many hours currently asleep) and Player Items (any items player made have found. Players can hold a max of 3 items at a time)
-- Players have a 1 in 8 chance of getting an item when they answer a question. This means, on avgerage, players will receive one item if they complete the game (8 questions to complete). There are three types of items - Dream Jumper, Luxuiry Pillow and Comforter. Each type also has three versions, so 3 jumers, 3 pillow, 3 comforters. Each item has a different impact on player stats. The items appear in bottom right corner.
+- User will see the intro screen with game name and then read short story intro
+- User will then be giving a choice of two options (Decision Branch 1)
+- One option will lead to an automatic battle against 3 foes
+- The other option will lead to a reaction time battle. In this case, the user will need to press the Enter key when the word GO appears and hope their reaction time is faster than that set for foe
+- User will lose health for each hit they take
+- If health goes below zero at any stage of game, it will be game over. 
+- User will then be giving a choice of two options (Decision Branch 2)
+- This will run similar to options in first decision branch
+- User will then be giving a choice of two options (Decision Branch 3)
+- This will run similar to options in first decision branch except there is no reaction time battle
+- User will then face a final battle. 
+- This final battle is based on reaction time battle but user will have to count to seven seconds in their head after the trigger word and only then press enter. 
+- If they press the Enter key between 6.5 to 7.5 seconds after trigger word, they win the battle and complete the game.
+- Game will auto restart after it ends
+
+### Flow Chart
+![flow chart image](images/flowchart.jpg)
 
 ## User Experience
 
@@ -90,78 +91,59 @@
 The website is designed with the following target audience in mind:
 - Project assessor
 - Student peers
-- People with an interest in music
+- People with an interest in python
 - People who enjoy games
-- People with a interest in dreams/sleep
+- People with a interest in adventure games
+- People fed up with landlords
 
 ### User Requirements and Expectations
 - Straight forward, easy to use interface
-- Quick page load times
-- Feedback for each question they answer
-- Feedback on their overall progress
+- Time to read and make selections
 - Clear target to complete the game
-- Questions to be interesting with a medium degree of difficulty
+- Retry game
 
 ### User Stories
 
 #### Player
 1. As a player, I want to start the game
 2. As a player, I want to understand what the game is about
-3. As a player, I want to know how to play the game
-4. As a player, I want to be able to see how am i am progressing through the game
-5. As a player, I want to verify if i got a an answer right or wrong
-6. As a player, I want to be told what the correct answer is if i give the wrong answer
+3. As a player, I want to be able to enter my name
+4. As a player, i want to know how much health I have left
 7. As a player, I want to receive acknowledment if i complete the game
 8. As a player, I want to be able to play the game without any bugs
 
 #### Creator
-13. As the creator, I want showcase my abilities with HTML, CSS and JavaScript
+13. As the creator, I want showcase my abilities with python
 14. As the creator, I want users to enjoy the game and have a interest in completing it
 15. As the creator, I want users to be surprised by some of the game features
-16. As the creator, I want to think about the songs as they answer the questions and have a desire to play that song afterwards
+16. As the creator, I want the game to be bug free and capture/handle any likely user input errors
 
 ## Design
 
 ### Design Choices
-The website was designed with soft colours and whimiscal font to give a relaxed atmosphere. Although the game is based on music questions, luck plays a large part in their ability to complete it. This idea reflects back to the idea that we dont have much control in real life to long we can sleep. 
+The website was designed to be displayed with a custom/CI made python enviroemt that mimics a website.
+pyfiglet and colorama were used to style and format the text
 
 ### Colour
-The colour palette was quite small for this website with the colour combination taken from
-https://digitalsynopsis.com/design/minimal-web-color-palettes-combination-hex-code/
-The colours used were #F8B195 #F67280  #C06C84  #6C5B7B  #355C7D 
-Whitesmoke was also used for some of the text.
-
-### Fonts
-The font family chosen was 'Merienda One', cursive. This is a flowing, playful script that works well for a game/dream setting
-
-### Structure
-The structure of this site is all on one page. There is a main grid of one row and two coloms. This splits the game areas into the left and right part of the screen. The Left side contains the song lyrics, missing word, game question, text box for answer and both control buttons (submit answer and continue). The right had part of main grid shows player info/stats, player progress and player items. A further grid is used in the right hand game section to break it down. FLex is also used extensivily through the site. Sections of the page are hidden or shown when needed. Control buttons are hidden/shown and enabled/disabled when required to reduce user error and also make it more intuitive to the user on what they should do next. An array is used to contain the questions and answers, while a nested array is used to store the different types of items and their sub-items.
-
-### Wireframe 
-
-Most of the game features from the first wire frame made it into submitted version (with a few exceptions, notable NPCs). The overall final layout is similar to original design.
-![balsamiq image](assets/images/readme_images/balsamiq.jpg)
-
+Basic colours were chosen from those available through https://pypi.org/project/colorama/
 
 ## Technologies Used
 
 ### Languages
 The following languages were used to develop the website:
-- HTML
-- CSS
-- JavaScript
+- Python
 
 ### Frameworks and Tools
 The following frameworks and tools were used to develop the website:
-- Github
+- Heroku
 - Gitpod
-- Google
-- Google Fonts
-- Balsamiq
-- Dream by WOMBO
+- Google Sheets
+- Colorama
+- Pyfiglet
+- Miro
 
 ## Features
-The website is one page with XXX features
+The app is onone webpage
 
 ### Question, Answer and Submit for Missing Song Lyric Game
 
@@ -253,7 +235,26 @@ The website was tested on several web browsers to ensure consistency. The browse
 - Fix: No fix added yet
 
 #### Deployment
--
+* Your code must be placed in the `run.py` file
+* Your dependencies must be placed in the `requirements.txt` file
+* Do not edit any of the other files or your code may not deploy properly
+
+## Creating the Heroku app
+
+When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+
+1. `heroku/python`
+2. `heroku/nodejs`
+
+You must then create a _Config Var_ called `PORT`. Set this to `8000`
+
+If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+
+Connect your GitHub repository and deploy as normal.
+
+## Constraints
+
+The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
 -
 
 
