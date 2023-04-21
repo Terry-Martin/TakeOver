@@ -25,16 +25,11 @@
     2. [Frameworks and Tools](#frameworks-and-tools)
 6. [Features](#features)
 7. [Testing](#validation)
-    1. [HTML Validation](#HTML-validation)
-    2. [CSS Validation](#CSS-validation)
-    3. [Accessibility](#accessibility)
-    4. [Performance](#performance)
-    5. [Device testing](#performing-tests-on-various-devices)
-    6. [Browser compatibility](#browser-compatability)
-8. [Bugs](#Bugs)
-9. [Deployment](#deplyment)
-10. [Credits](#credits)
-11. [Acknowledgements](#acknowledgements)
+    1. [Python Validation](#PYTHON-validation)
+    2. [Bugs](#Bugs)
+8. [Deployment](#deplyment)
+9. [Credits](#credits)
+10. [Acknowledgements](#acknowledgements)
 
 ## Project Goals
 
@@ -51,17 +46,17 @@
 ### Player Goals
 - Read story and options
 - Enter name
-- Virew foe info
+- View foe info
 - Make selections
 - View current health
 - Respond to reaction time battles
-- CHance to defeat final boss
+- Chance to defeat final boss
 - Retry game after defeat
 
 ## Game Info
 
 ### Game story
-- You are a born survivor and a seasoned warrior. Weary of seeing the corrupt politians and greedy landowners thrive on he back of your blood and sweat.
+- You are a born survivor and a seasoned warrior. Weary of seeing the corrupt politians and greedy landowners thrive on the back of your blood and sweat.
 - No longer willing to take orders for pitiful payouts
 - Its time to put your skills and charisma to the test and seat yourself at the top of the table.
 - Determined to crush anyone that dares to stand in your way
@@ -79,7 +74,6 @@
 - This will run similar to options in first decision branch except there is no reaction time battle
 - User will then face a final battle. 
 - This final battle is based on reaction time battle but user will have to count to seven seconds in their head after the trigger word and only then press enter. 
-- If they press the Enter key between 6.5 to 7.5 seconds after trigger word, they win the battle and complete the game.
 - Game will auto restart after it ends
 
 ### Flow Chart
@@ -143,136 +137,116 @@ The following frameworks and tools were used to develop the website:
 - Miro
 
 ## Features
-The app is onone webpage
-
-### Question, Answer and Submit for Missing Song Lyric Game
-
-![balsamiq image](assets/images/readme_images/feature1.jpg)
-- Displays 4 lines of a song. Each song has Dream theme to it
-- It takes 8 songs to complete game. They are selected randomly from a bank of 25 question/answers.
-- Questions/Answers are stored in an array. Songs sourced from Google. Questions are custom made
-- Text of first question asked flashes on screen to draw user attention and direct their focus
-- User is told how many letters there are in missing lyric word
-- Answers can be typed in Input Box
-- Answers will be accepted in lower and upper case
-
-### Player Info
-
-![balsamiq image](assets/images/readme_images/feature2.jpg)
-- Displays users 4 stats with current score - Dreaminess, Comfort, Luck and Sleep Depth
-- Dreaminess, Comfort and Luck are generated at the start of each game. Each stat score will start at a number between 70 to 90 (randomly decided)
-- These 3 stats are combined to give an overall Sleep Depth score.
-- User stats will increase/decrease depnding on answers given to Missing Song Lyric questions
-
-### Sleep Info
-
-![balsamiq image](assets/images/readme_images/feature3.jpg)
-- Displays a progress bar (circle) that highlights the numer of hours sleep the user has achived so far
-- This increments by one hour each question answered, regardless if the answer given was correct or incorrect
-- Each hours sleep costs the user 10 points of each stat
-- Target of 8 hours is shown. If user reaches this target they complete the game
-- Sleep Depth stat score shows in green when it is high, changes to yellow when in mid range and red when score is low
-
-### Player Items
-
-![balsamiq image](assets/images/readme_images/feature4.jpg)
-- This area starts the game blank as user has zero items 
-- Items can be found randomly when users answer a question. The chances of finding an item are 1 in 8
-- There are 3 types of items - Jumper, Pillow and Comforter
-- There are 3 subtypes of each item. Finding any of these items will give a positive or negative influence on user stats. 
-- USers can only find one of each item type per game but can possible find 3 items per game (eg, user can find 1 Jumper, 1 Pillow and 1 Comforter per game but not 2 Jumpers)
-- Items are displayed as an image after they are found
-- These images were generated using Dream by Womba AI imaging, so are custome made
 
 
-## Validation
+### Title
 
-### HTML Validation
+![image](images/title.jpg)
 
-- Passed through https://validator.w3.org/
-
-
-### CSS Validation
-
-- Passed through https://jigsaw.w3.org/css-validator/
+- Made with Colorama and Pyfiglet
 
 
-### JaveScript Validation
 
-- Passed through https://jshint.com/
+### Player Name and Stats
 
+![image](images/name_stats.jpg)
 
-### Performance
-
-Checked and edited after Google Lighthouse
-
-
-### Performance tests on various devices
-
-Throughout development and testing, I used the following devices to ensure that the site was responsive, and worked as intended.
-
-- Laptop running Windows 11
-- Samsung S20
+- Allows user enter their name
+- Displays current stats
 
 
-### Browser Compatibility
 
-The website was tested on several web browsers to ensure consistency. The browsers used are as follows:
+### Player Choices
 
-- Microsoft Edge
-- Google Chrome
-- Firefox
+![image](images/option.jpg)
 
-## Bugs
+- Gives users two options
+- Both will lead to a battle but one to reaction time and the other to auto
 
- - Bug from validator: Bad value for attribute src on element img: Must be non-empty.
- - Fix: Set the image src attribute to #:
 
-- Bug from validator: Element hr not allowed as child of element ul in this context.
-- Fix: Move HR tag outside of ul/ol
 
-- Bug: Game not restarting when fuction called
-- Fix: No fix added yet
+### Auto Battle
 
-#### Deployment
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
+![image](images/auto_battle.jpg)
+
+- Player will battle three foes one after the other.
+- This battle will run automatically with no user input needed
+- Player health and attack and foe status will show as it loops through attacks
+
+
+
+### Reaction Battle
+
+![image](images/reaction_time_battle.jpg)
+
+- User to hit Enter key as soon as trigger word appears on screen
+- User will be prompted to prepare for this battle
+- There will then be a randon delay (between 2 and 5 seconds) before the trigger word appears on screen and reaction timer begins
+- Each foe has a differenct reaction time assigned to them
+- Final battle adds a level of difficulty to this by telling the user to wait for 7 seconds AFTER the trigger word appears on screen before hitting ENTER
+- Target to win this battle (and clear game) is to press enter between 6.5 to 7.5 seconds after trigger word
+
+
+
+### Error Handling
+
+![image](images/error-handling.jpg)
+
+
+
+
+### Game Over
+
+![image](images/game_over.jpg)
+
+- Made with Colorama and Pyfiglet
+
+
+
+## Testing
+
+### CI Python Linter
+
+- Passed through https://pep8ci.herokuapp.com/
+- All clear, no errors found
+
+### Bugs
+
+- Bug: When adding pyfiglet and colorama
+- Fix: Rearrange order of inport statements at top of run.py
+
+- Bug: In deployed site after adding pyfiglet and colorama
+- Fix: Add names and versions to requirements.txt
+
+- Bug: Using Character class out of scope
+- Fix: Pass data through arguments in functions
+
+## Deployment
+- Code placed in the `run.py` file
+- Dependencies placed in the `requirements.txt` file
 
 ## Creating the Heroku app
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+Followed instructions from Code Institute:
+- Add two buildpacks from the _Settings_ tab. The ordering is as follows:
+- 1. `heroku/python`
+- 2. `heroku/nodejs`
+- Create a _Config Var_ called `PORT`. Set this to `8000`
+- For credentials, create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+- Connect  GitHub repository and deploy
+- The deployment terminal is set to 80 columns by 24 rows.
 
-1. `heroku/python`
-2. `heroku/nodejs`
-
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
-
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
-
-Connect your GitHub repository and deploy as normal.
-
-## Constraints
-
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
--
-
-
-#### Images
-
-- https://www.pexels.com/
-- https://dream.ai/create
+- Part 1 - https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+LS101+2021_T1/courseware/293ee9d8ff3542d3b877137ed81b9a5b/e3b664e16366444c8d722c5d8340b340/
+- Part 2 - https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+LS101+2021_T1/courseware/293ee9d8ff3542d3b877137ed81b9a5b/e3b664e16366444c8d722c5d8340b340/
 
 
 ### Code
 
-- Progress Bar code adapted from: https://codepen.io/Asadabbas/pen/ZEGLBoJ 
-- Text flashing from: https://stackoverflow.com/questions/9620594/removing-ul-indentation-with-css
+- Validation code based on: https://www.youtube.com/watch?v=LUWyA3m_-r0
 
 ## Acknowledgements
 
 Thanks to all the below:
-- Classmates who are also giving a helping hand
+- Classmates who are always on halnd to help out
 - Slack community
 - Course facilitator (Paul Thomas)
-- My Creative Director Nason (7 year old god son) Thanks for Dream Jumper idea
