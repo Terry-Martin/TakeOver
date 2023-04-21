@@ -69,8 +69,8 @@ def create_player(new_name):
     # Get new id number which is 1 higher than previous id number
     player_id = len(get_player_info)
     player_name = new_name
-    player_health = 500
-    player_attack_power = 75
+    player_health = 650
+    player_attack_power = 80
 
     # Add new player details to sheet
     SHEET.worksheet("player").append_row([player_id, player_name,
@@ -197,7 +197,14 @@ def decision(decision_tree, player):
                 print("  You need to enter a number" + "\n")
 
         if player_choice == 1:
-            # Battle will have 3 foes
+            time.sleep(2)
+            print("You slow your pace and approach the camp fire openly.")
+            time.sleep(2)
+            print("Before you even say a word, the 3 men draw their sowrds.")
+            time.sleep(2)
+            print("Ah well, you tried the softly, softly approach but in " +
+                  "truth you realise you were spoiling for a fight, anyway.")
+            time.sleep(2)
 
             # Create first foe
             foe = create_foe(2)
@@ -219,16 +226,29 @@ def decision(decision_tree, player):
         else:
             foe = create_foe(5)
             # foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
-
+            time.sleep(2)
+            print("Your steer well clear of the camp fire.")
+            time.sleep(2)
+            print("You know what you want, might as well head stright " +
+                  "for town")
+            time.sleep(2)
+            print("Before you get there, though to hear a sound from " +
+                  "the side. A wolf attacking....you barely have time to get" +
+                  " your hand on your sword hilt")
+            time.sleep(6)
+            input("Are you ready? (press Enter)")
+            print()
             # Reaction Time fight
             # User hits enter when GO word is diplayed. Reaction time is noted
-            time.sleep(1)
             print(get_text_info[14])
-            time.sleep(1)
+            print()
+            time.sleep(3)
             print(get_text_info[15])
-            time.sleep(1)
+            time.sleep(3)
+            print()
             print(get_text_info[16])
             print()
+            time.sleep(3)
             # Randon time for the word GO to appear between 2 and 5 seconds
             time.sleep(random.randint(2, 5))
             print(get_text_info[17])
@@ -282,6 +302,15 @@ def decision(decision_tree, player):
         if player_choice == 1:
             foe = create_foe(6)
             # foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
+            time.sleep(2)
+            print("No point messing around")
+            time.sleep(2)
+            print("Attack first. Think later.")
+            time.sleep(2)
+            print("You charge forward at the biggest of them")
+            time.sleep(6)
+            input("Are you ready? (press Enter)")
+            print()
 
             time.sleep(1)
             print(get_text_info[14])
@@ -290,6 +319,7 @@ def decision(decision_tree, player):
             time.sleep(1)
             print(get_text_info[16])
             print()
+            time.sleep(3)
             # Randon time for the word GO to appear between 2 and 5 seconds
             time.sleep(random.randint(2, 5))
             print(get_text_info[17])
@@ -315,8 +345,8 @@ def decision(decision_tree, player):
 
             # Player takes 200 damage if foe reaction time is faster
             else:
-                print(f"{foe.name} gets in a quick attack before you knock" +
-                      "them unconcious")
+                print(f"{foe.name} gets in a quick attack before you " +
+                      "knock them unconcious")
                 player.health = player.health - 200
                 print(Fore.GREEN + f"  {player.name} has {player.health}" +
                       " health remaining\n")
@@ -325,6 +355,17 @@ def decision(decision_tree, player):
                     game_over()
 
         else:
+            time.sleep(2)
+            print("You feel the blood from your previous battle dripping " +
+                  "down your arm, even as you talk in an easy manner")
+            time.sleep(2)
+            print("They are getting more and more tense. Panicky")
+            time.sleep(2)
+            print("No real surprise when their only reply is to " +
+                  "draw their weapons")
+            time.sleep(6)
+
+            print()
             foe = create_foe(7)
             foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
             start_battle(foe, player)
@@ -357,6 +398,17 @@ def decision(decision_tree, player):
                 print("  You need to enter a number \n")
 
         if player_choice == 1:
+            time.sleep(2)
+            print("The place looking worse than ever but still makes you grin")
+            time.sleep(2)
+            print("The barmiad bringing you the cheapest whiskey " +
+                  "before you even order")
+            time.sleep(2)
+            print("She certainly knows her customers")
+            time.sleep(2)
+            print("But it seems a few other customers are not so happy " +
+                  "to see you back....")
+
             foe = create_foe(10)
             foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
             start_battle(foe, player)
@@ -370,6 +422,17 @@ def decision(decision_tree, player):
             start_battle(foe_three, player)
 
         else:
+            time.sleep(2)
+            print("You saunter over and take a seat at the poker table")
+            time.sleep(2)
+            print("Barely 2 coins on you but you nod to be dealt in")
+            time.sleep(2)
+            print("Eyes around the table twitching as you win your " +
+                  "third stright game")
+            time.sleep(4)
+            print("The word cheat muttered...and well, thats it takes " +
+                  "for mayhem to break loose")
+            time.sleep(6)
             foe = create_foe(11)
             foe.intro(foe.cid, foe.name, foe.health, foe.attack_power)
             start_battle(foe, player)
@@ -423,7 +486,7 @@ def boss_battle():
           "to 7 and then hit the ENTER key.")
     print()
     time.sleep(3)
-    input("Are you ready?")
+    input("Are you ready? (press Enter)")
 
     # Randon time for the word GO to appear between 2 and 5 seconds
     time.sleep(random.randint(2, 5))
@@ -485,10 +548,11 @@ def main():
     print()
     print("---------------------------------------------------------------")
     player.intro(player.cid, player.name, player.health, player.attack_power)
-    time.sleep(1)
+    time.sleep(3)
     print(get_text_info[5] + "\n")
-    time.sleep(1)
+    time.sleep(4)
     print(get_text_info[6] + "\n")
+    time.sleep(3)
     # https://www.youtube.com/watch?v=LUWyA3m_-r0
     # Display player starting info
     decision(1, player)

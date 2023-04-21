@@ -138,6 +138,10 @@ The following frameworks and tools were used to develop the website:
 
 ## Features
 
+### Data stored and taken from Google Sheets
+
+![image](images/sheet.jpg)
+
 
 ### Title
 
@@ -243,6 +247,9 @@ Followed instructions from Code Institute:
 ### Code
 
 - Validation code based on: https://www.youtube.com/watch?v=LUWyA3m_-r0
+
+### Next steps
+- Move all string\text to excel sheet "text"
 
 ## Acknowledgements
 
